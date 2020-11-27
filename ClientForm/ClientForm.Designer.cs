@@ -1,7 +1,7 @@
 ﻿
-namespace projetoIS
+namespace ClientForm
 {
-    partial class Form1
+    partial class ClientForm
     {
         /// <summary>
         /// Required designer variable.
@@ -153,6 +153,7 @@ namespace projetoIS
             this.buttonOpenXml.TabIndex = 10;
             this.buttonOpenXml.Text = "...";
             this.buttonOpenXml.UseVisualStyleBackColor = true;
+            this.buttonOpenXml.Click += new System.EventHandler(this.buttonOpenXml_Click);
             // 
             // buttonOpenExcel
             // 
@@ -162,6 +163,7 @@ namespace projetoIS
             this.buttonOpenExcel.TabIndex = 10;
             this.buttonOpenExcel.Text = "...";
             this.buttonOpenExcel.UseVisualStyleBackColor = true;
+            this.buttonOpenExcel.Click += new System.EventHandler(this.buttonOpenExcel_Click);
             // 
             // textBoxInputRest
             // 
@@ -246,6 +248,7 @@ namespace projetoIS
             this.buttonSaveHtml.TabIndex = 18;
             this.buttonSaveHtml.Text = "...";
             this.buttonSaveHtml.UseVisualStyleBackColor = true;
+            this.buttonSaveHtml.Click += new System.EventHandler(this.buttonSaveHtml_Click);
             // 
             // radioOutputHtml
             // 
@@ -310,8 +313,9 @@ namespace projetoIS
             this.buttonAddFlow.TabIndex = 22;
             this.buttonAddFlow.Text = "Add Flow";
             this.buttonAddFlow.UseVisualStyleBackColor = true;
+            this.buttonAddFlow.Click += new System.EventHandler(this.buttonAddFlow_Click);
             // 
-            // Form1
+            // ClientForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -335,7 +339,7 @@ namespace projetoIS
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Margin = new System.Windows.Forms.Padding(2);
-            this.Name = "Form1";
+            this.Name = "ClientForm";
             this.Text = " Data Sources Converter Dashboard";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
