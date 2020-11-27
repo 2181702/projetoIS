@@ -33,22 +33,22 @@ namespace ClientForm
             switch (InputType)
             {
                 case DataType.EXCEL:
-                    response = new ExcelHandler().ExcelToJson(InputLocation);
+                    response = new ExcelHandler().ExcelToJson(InputLocation); //TODO Implement
                     break;
                 case DataType.XML:
                     response = new XmlHandler().XmlToJson(InputLocation);
                     break;
                 case DataType.REST:
-                    response = new RestApiHandler().RestApiToJson();
+                    response = new RestApiHandler().RestApiToJson(); //TODO Implement
                     break;
             }
             switch (OutputType)
             {
                 case DataType.HTML:
-                    response = new HtmlHandler().JsonToHTML(response.Data, OutputLocation);
+                    response = new HtmlHandler().JsonToHTML(response.Data, OutputLocation); //TODO Implement
                     break;
                 case DataType.REST:
-                    response = new RestApiHandler().JsonToRestApi(response.Data,OutputLocation);
+                    response = new RestApiHandler().JsonToRestApi(response.Data,OutputLocation); //TODO Implement
                     break;
             }
             return response;

@@ -8,9 +8,9 @@ namespace ClientForm
 {
     class ExcelHandler
     {
-        public string ExcelToJson(string fileLocation)
+        public Response<string> ExcelToJson(string fileLocation)
         {
-            return "";
+            return new Response<string>("NO JSON INFO AVALIBLE","Not implemented yet!",STATUS_CODE.ERROR);
         }
     }
 }

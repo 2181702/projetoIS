@@ -10,11 +10,19 @@ namespace ClientForm
 {
     class XmlHandler
     {
-        public string XmlToJson(string filePath)
+        public Response<string> XmlToJson(string filePath)
         {
             XmlDocument doc = new XmlDocument();
             doc.Load(filePath);
-            return JsonConvert.SerializeXmlNode(doc); ;
+            try
+            {
+                return new Response<string>(JsonConvert.SerializeXmlNode(doc), "XML -> Json | OK!", STATUS_CODE.OK);
+            }
+            catch(Exception e)
+            {
+                return new Response<string>("Unable to Serialize Xml Document: " + filePath,e.Message,STATUS_CODE.ERROR);
+            }
+            
         }
     }
 }

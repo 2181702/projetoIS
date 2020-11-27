@@ -8,9 +8,9 @@ namespace ClientForm
         {
         }
 
-        internal void JsonToHTML(string json, string outputLocation)
+        internal Response<string> JsonToHTML(string json, string outputLocation)
         {
-            throw new NotImplementedException();
+            return new Response<string>("NO JSON INFO AVALIBLE", "Not implemented yet!", STATUS_CODE.ERROR);
         }
     }
 }

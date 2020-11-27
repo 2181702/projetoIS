@@ -8,14 +8,14 @@ namespace ClientForm
         {
         }
 
-        internal string RestApiToJson()
+        internal Response<string> RestApiToJson()
         {
-            throw new NotImplementedException();
+            return new Response<string>("NO JSON INFO AVALIBLE", "Not implemented yet!", STATUS_CODE.ERROR);
         }
 
-        public void JsonToRestApi(string json, string outputLocation)
+        public Response<string> JsonToRestApi(string json, string outputLocation)
         {
-
+            return new Response<string>("NO JSON INFO AVALIBLE", "Not implemented yet!", STATUS_CODE.ERROR);
         }
     }
 }
