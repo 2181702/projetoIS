@@ -124,12 +124,48 @@ namespace ClientForm
 
         private void buttonRun_Click(object sender, EventArgs e)
         {
-
+            Response<string> response = new Response<string>();
+            int numErrors = 0;
+            int numFlows = listBoxFlowsToRun.Items.Count;
             foreach(Flow f in listBoxFlowsToRun.Items)
             {
-                f.Run();
+                response = f.Run();
+                if(response.Status != STATUS_CODE.OK)
+                {
+                    numErrors++;
+                    if (!DealWithResponse(response))
+                        break;
+                }
             }
+            if(numErrors == 0)
+            {
+                MessageBox.Show("All flows runned successfully!");
+            }
+            else
+            {
+                MessageBox.Show(numFlows - numErrors + " Flows runned out of " + numFlows);
+            }
+        }
 
+        private bool DealWithResponse(Response<string> response)
+        {
+            bool returnable = true;
+            switch (response.Status)
+            {
+                case STATUS_CODE.ERROR:
+                    DialogResult dialogResult = MessageBox.Show(response.Message + "\n Want to continue the other flows?", "Error!", MessageBoxButtons.YesNo);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        returnable = true;
+                    }
+                    else if (dialogResult == DialogResult.No)
+                    {
+                        returnable = false;
+                    }
+                    MessageBox.Show(response.Message);
+                    break;
+            }
+            return returnable;
         }
 
         private void buttonAddToRun_Click(object sender, EventArgs e)

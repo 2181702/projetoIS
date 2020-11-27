@@ -27,30 +27,31 @@ namespace ClientForm
             return "[" + InputType + "] " + InputLocation.ToString() + "  ->  " + OutputLocation.ToString() + " [" + OutputType + "]"; 
         }
 
-        internal void Run()
+        internal Response<string> Run()
         {
-            string json = "";
+            Response<string> response = new Response<string>();
             switch (InputType)
             {
                 case DataType.EXCEL:
-                    json = new ExcelHandler().ExcelToJson(InputLocation);
+                    response = new ExcelHandler().ExcelToJson(InputLocation);
                     break;
                 case DataType.XML:
-                    json = new XmlHandler().XmlToJson(InputLocation);
+                    response = new XmlHandler().XmlToJson(InputLocation);
                     break;
                 case DataType.REST:
-                    json = new RestApiHandler().RestApiToJson();
+                    response = new RestApiHandler().RestApiToJson();
                     break;
             }
             switch (OutputType)
             {
                 case DataType.HTML:
-                    new HtmlHandler().JsonToHTML(json,OutputLocation);
+                    response = new HtmlHandler().JsonToHTML(response.Data, OutputLocation);
                     break;
                 case DataType.REST:
-                    new RestApiHandler().JsonToRestApi(json,OutputLocation);
+                    response = new RestApiHandler().JsonToRestApi(response.Data,OutputLocation);
                     break;
             }
+            return response;
         }
     }
 
@@ -82,10 +83,39 @@ namespace ClientForm
             Flows.Remove(flow);
             clientForm.UpdateExistingFlows();
         }
+
     }
 
     public enum DataType
     {
         UNDEFINED, EXCEL, XML, JSON, REST, HTML
+    }
+
+    public class Response<T>
+    {
+        public Response(T _data, STATUS_CODE _status)
+        {
+            Status = _status;
+            Data = _data;
+        }
+        public Response(T _data, string _message, STATUS_CODE _status)
+        {
+            Status = _status;
+            Data = _data;
+            Message = _message;
+        }
+        public Response()
+        {
+
+        }
+
+        public T Data { get; set; }
+        public STATUS_CODE Status { get; set; }
+        public string Message { get; set; }
+    }
+
+    public enum STATUS_CODE
+    {
+        OK,ERROR, PARSING_ERROR
     }
 }
