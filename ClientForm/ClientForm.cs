@@ -170,9 +170,14 @@ namespace ClientForm
 
         private void buttonAddToRun_Click(object sender, EventArgs e)
         {
-            var flow = listBoxSavedFlows.SelectedItem;
-            if(!listBoxFlowsToRun.Items.Contains(flow))
-                listBoxFlowsToRun.Items.Add(flow);
+            try { 
+                var flow = listBoxSavedFlows.SelectedItem;
+                if(!listBoxFlowsToRun.Items.Contains(flow))
+                    listBoxFlowsToRun.Items.Add(flow);
+            }catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message + "\nNo Flow Selected!");
+            }
         }
 
         private void buttonDeleteRun_Click(object sender, EventArgs e)

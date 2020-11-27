@@ -45,7 +45,7 @@ namespace ClientForm
             switch (OutputType)
             {
                 case DataType.HTML:
-                    response = new HtmlHandler().JsonToHTML(response.Data, OutputLocation); //TODO Implement
+                    response = new HtmlHandler().JsonToHTML(response.Data, OutputLocation); //TODO Refactor
                     break;
                 case DataType.REST:
                     response = new RestApiHandler().JsonToRestApi(response.Data,OutputLocation); //TODO Implement
