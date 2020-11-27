@@ -56,7 +56,7 @@ namespace ClientForm
                     flow.OutputLocation = textBoxOutputRest.Text;
                     break;
                 default:
-                    MessageBox.Show("No Input selected!");
+                    MessageBox.Show("No Output selected!");
                     return;
             }
             flowHandler.AddFlow(flow);
@@ -120,6 +120,33 @@ namespace ClientForm
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.ShowDialog();
             textBoxOutputHtml.Text = openFileDialog.FileName;
+        }
+
+        private void buttonRun_Click(object sender, EventArgs e)
+        {
+
+            foreach(Flow f in listBoxFlowsToRun.Items)
+            {
+                f.Run();
+            }
+
+        }
+
+        private void buttonAddToRun_Click(object sender, EventArgs e)
+        {
+            var flow = listBoxSavedFlows.SelectedItem;
+            if(!listBoxFlowsToRun.Items.Contains(flow))
+                listBoxFlowsToRun.Items.Add(flow);
+        }
+
+        private void buttonDeleteRun_Click(object sender, EventArgs e)
+        {
+            listBoxFlowsToRun.Items.Remove(listBoxFlowsToRun.SelectedItem);
+        }
+
+        private void buttonDeleteSaved_Click(object sender, EventArgs e)
+        {
+            flowHandler.RemoveFlow((Flow)listBoxSavedFlows.SelectedItem);
         }
     }
 }

@@ -26,6 +26,32 @@ namespace ClientForm
         {
             return "[" + InputType + "] " + InputLocation.ToString() + "  ->  " + OutputLocation.ToString() + " [" + OutputType + "]"; 
         }
+
+        internal void Run()
+        {
+            string json = "";
+            switch (InputType)
+            {
+                case DataType.EXCEL:
+                    json = new ExcelHandler().ExcelToJson(InputLocation);
+                    break;
+                case DataType.XML:
+                    json = new XmlHandler().XmlToJson(InputLocation);
+                    break;
+                case DataType.REST:
+                    json = new RestApiHandler().RestApiToJson();
+                    break;
+            }
+            switch (OutputType)
+            {
+                case DataType.HTML:
+                    new HtmlHandler().JsonToHTML(json,OutputLocation);
+                    break;
+                case DataType.REST:
+                    new RestApiHandler().JsonToRestApi(json,OutputLocation);
+                    break;
+            }
+        }
     }
 
     public class FlowHandler
@@ -48,6 +74,12 @@ namespace ClientForm
         public void AddFlow(Flow newFlow)
         {
             Flows.Add(newFlow);
+            clientForm.UpdateExistingFlows();
+        }
+
+        internal void RemoveFlow(Flow flow)
+        {
+            Flows.Remove(flow);
             clientForm.UpdateExistingFlows();
         }
     }

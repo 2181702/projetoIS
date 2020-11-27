@@ -68,6 +68,7 @@ namespace ClientForm
             this.buttonRun.TabIndex = 1;
             this.buttonRun.Text = "Run";
             this.buttonRun.UseVisualStyleBackColor = true;
+            this.buttonRun.Click += new System.EventHandler(this.buttonRun_Click);
             // 
             // label1
             // 
@@ -212,6 +213,7 @@ namespace ClientForm
             this.buttonDeleteRun.TabIndex = 14;
             this.buttonDeleteRun.Text = "Delete";
             this.buttonDeleteRun.UseVisualStyleBackColor = true;
+            this.buttonDeleteRun.Click += new System.EventHandler(this.buttonDeleteRun_Click);
             // 
             // buttonDeleteSaved
             // 
@@ -221,6 +223,7 @@ namespace ClientForm
             this.buttonDeleteSaved.TabIndex = 14;
             this.buttonDeleteSaved.Text = "Delete";
             this.buttonDeleteSaved.UseVisualStyleBackColor = true;
+            this.buttonDeleteSaved.Click += new System.EventHandler(this.buttonDeleteSaved_Click);
             // 
             // buttonAddToRun
             // 
@@ -230,6 +233,7 @@ namespace ClientForm
             this.buttonAddToRun.TabIndex = 14;
             this.buttonAddToRun.Text = "Add To Run";
             this.buttonAddToRun.UseVisualStyleBackColor = true;
+            this.buttonAddToRun.Click += new System.EventHandler(this.buttonAddToRun_Click);
             // 
             // buttonSaveFlow
             // 
