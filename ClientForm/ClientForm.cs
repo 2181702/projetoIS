@@ -189,5 +189,15 @@ namespace ClientForm
         {
             flowHandler.RemoveFlow((Flow)listBoxSavedFlows.SelectedItem);
         }
+
+        private void btnOutputRest_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnInputRest_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

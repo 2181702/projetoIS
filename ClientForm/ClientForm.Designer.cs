@@ -56,7 +56,10 @@ namespace ClientForm
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.buttonAddFlow = new System.Windows.Forms.Button();
+            this.btnInputRest = new System.Windows.Forms.Button();
+            this.btnOutputRest = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonRun
@@ -131,6 +134,7 @@ namespace ClientForm
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnInputRest);
             this.groupBox1.Controls.Add(this.buttonOpenXml);
             this.groupBox1.Controls.Add(this.buttonOpenExcel);
             this.groupBox1.Controls.Add(this.textBoxInputRest);
@@ -302,6 +306,7 @@ namespace ClientForm
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.btnOutputRest);
             this.groupBox2.Location = new System.Drawing.Point(396, 12);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(392, 226);
@@ -318,6 +323,26 @@ namespace ClientForm
             this.buttonAddFlow.Text = "Add Flow";
             this.buttonAddFlow.UseVisualStyleBackColor = true;
             this.buttonAddFlow.Click += new System.EventHandler(this.buttonAddFlow_Click);
+            // 
+            // btnInputRest
+            // 
+            this.btnInputRest.Location = new System.Drawing.Point(297, 175);
+            this.btnInputRest.Name = "btnInputRest";
+            this.btnInputRest.Size = new System.Drawing.Size(35, 27);
+            this.btnInputRest.TabIndex = 11;
+            this.btnInputRest.Text = "...";
+            this.btnInputRest.UseVisualStyleBackColor = true;
+            this.btnInputRest.Click += new System.EventHandler(this.btnInputRest_Click);
+            // 
+            // btnOutputRest
+            // 
+            this.btnOutputRest.Location = new System.Drawing.Point(345, 111);
+            this.btnOutputRest.Name = "btnOutputRest";
+            this.btnOutputRest.Size = new System.Drawing.Size(35, 27);
+            this.btnOutputRest.TabIndex = 12;
+            this.btnOutputRest.Text = "...";
+            this.btnOutputRest.UseVisualStyleBackColor = true;
+            this.btnOutputRest.Click += new System.EventHandler(this.btnOutputRest_Click);
             // 
             // ClientForm
             // 
@@ -348,6 +373,7 @@ namespace ClientForm
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -381,6 +407,8 @@ namespace ClientForm
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button buttonAddFlow;
+        private System.Windows.Forms.Button btnInputRest;
+        private System.Windows.Forms.Button btnOutputRest;
     }
 }
 
