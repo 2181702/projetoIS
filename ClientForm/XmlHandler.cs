@@ -12,10 +12,9 @@ namespace ClientForm
     {
         public Response<string> XmlToJson(string filePath)
         {
-            XmlDocument doc = new XmlDocument();
-            doc.Load(filePath);
-            try
-            {
+            try { 
+                XmlDocument doc = new XmlDocument();
+                doc.Load(filePath);
                 return new Response<string>(JsonConvert.SerializeXmlNode(doc), "XML -> Json | OK!", STATUS_CODE.OK);
             }
             catch(Exception e)
