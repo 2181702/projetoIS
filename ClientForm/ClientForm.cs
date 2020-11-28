@@ -192,7 +192,7 @@ namespace ClientForm
 
         private void btnOutputRest_Click(object sender, EventArgs e)
         {
-
+            new ApiRequestFormHandler(this).GetRestRequest();
         }
 
         private void btnInputRest_Click(object sender, EventArgs e)

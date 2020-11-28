@@ -13,6 +13,7 @@ namespace ClientForm
 {
     public partial class ApiRequestForm : Form
     {
+        private Dictionary<string, string> headers;
         public ApiRequestForm()
         {
             InitializeComponent();
@@ -22,6 +23,11 @@ namespace ClientForm
         private void ApiRequestForm_Load(object sender, EventArgs e)
         {
             comboBoxMethods.DataSource = Enum.GetValues(typeof(HttpMethods));
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            new ApiRequestFormHandler().UpdateRequest(headers, (HttpMethods)Enum.Parse(typeof(HttpMethods), comboBoxMethods.SelectedText), txtBoxUrl.Text);
         }
     }
 
