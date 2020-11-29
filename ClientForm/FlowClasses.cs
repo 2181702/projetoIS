@@ -33,7 +33,7 @@ namespace ClientForm
             switch (InputType)
             {
                 case DataType.EXCEL:
-                    response = new ExcelHandler().ExcelToJson(InputLocation); //TODO Implement
+                    response = new ExcelHandler().ExcelToJson(InputLocation);
                     break;
                 case DataType.XML:
                     response = new XmlHandler().XmlToJson(InputLocation);
