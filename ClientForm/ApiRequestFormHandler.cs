@@ -13,7 +13,7 @@ namespace ClientForm
     {
         private ClientForm client;
 
-        private Response<HttpRequestMessage> response;
+        private static Response<HttpRequestMessage> response;
 
         public ApiRequestFormHandler(ClientForm form)
         {
@@ -43,7 +43,7 @@ namespace ClientForm
                 headers.TryGetValue(k, out data);
                 request.Headers.Add(k, data);
             }
-            response = new Response<HttpRequestMessage>(request,STATUS_CODE.OK);
+            response = new Response<HttpRequestMessage>(request,"All Ok",STATUS_CODE.OK);
         }
 
         public HttpMethod GetMethodFromEnum(HttpMethods method)

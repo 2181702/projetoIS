@@ -28,7 +28,10 @@ namespace ClientForm
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            new ApiRequestFormHandler().UpdateRequest(ToDictionary(headers), (HttpMethods)Enum.Parse(typeof(HttpMethods), comboBoxMethods.SelectedText), txtBoxUrl.Text);
+            HttpMethods methods;
+            Enum.TryParse<HttpMethods>(comboBoxMethods.SelectedValue.ToString(), out methods);
+            new ApiRequestFormHandler().UpdateRequest(ToDictionary(headers), methods, txtBoxUrl.Text);
+            Close();
         }
 
         private void btnAddHeader_Click(object sender, EventArgs e)
