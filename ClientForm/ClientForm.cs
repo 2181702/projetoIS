@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -13,6 +14,9 @@ namespace ClientForm
     public partial class ClientForm : Form
     {
         private FlowHandler flowHandler;
+
+        private HttpRequestMessage tempInputMessage;
+        private HttpRequestMessage tempOutputMessage;
         public ClientForm()
         {
             InitializeComponent();
@@ -35,7 +39,7 @@ namespace ClientForm
                     break;
                 case DataType.REST:
                     flow.InputType = DataType.REST;
-                    flow.InputLocation = textBoxInputRest.Text;
+                    flow.InputApiRequest = tempInputMessage;
                     break;
                 case DataType.XML:
                     flow.InputType = DataType.XML;
@@ -53,7 +57,7 @@ namespace ClientForm
                     break;
                 case DataType.REST:
                     flow.OutputType = DataType.REST;
-                    flow.OutputLocation = textBoxOutputRest.Text;
+                    flow.OutputApiRequest = tempOutputMessage;
                     break;
                 default:
                     MessageBox.Show("No Output selected!");
@@ -192,11 +196,30 @@ namespace ClientForm
 
         private void btnOutputRest_Click(object sender, EventArgs e)
         {
-            new ApiRequestFormHandler(this).GetRestRequest();
+            Response<HttpRequestMessage> response = new ApiRequestFormHandler(this).GetRestRequest();
+            if(response.Status == STATUS_CODE.OK)
+            {
+                textBoxOutputRest.Text = response.Data.RequestUri.ToString();
+                tempOutputMessage = response.Data;
+            }
+            else
+            {
+                MessageBox.Show(response.Message);
+            }
         }
 
         private void btnInputRest_Click(object sender, EventArgs e)
         {
+            Response<HttpRequestMessage> response = new ApiRequestFormHandler(this).GetRestRequest(); 
+            if (response.Status == STATUS_CODE.OK)
+            {
+                textBoxInputRest.Text = response.Data.RequestUri.ToString();
+                tempInputMessage = response.Data;
+            }
+            else
+            {
+                MessageBox.Show(response.Message);
+            }
 
         }
     }

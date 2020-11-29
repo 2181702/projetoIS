@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,8 +11,10 @@ namespace ClientForm
     {
         public DataType InputType { get; set; }
         public String InputLocation { get; set; }
+        public HttpRequestMessage InputApiRequest { get; set; }
         public DataType OutputType { get; set; }
         public String OutputLocation { get; set; }
+        public HttpRequestMessage OutputApiRequest { get; set; }
 
         public Flow() { }
         public Flow(DataType inputType, string inputLocation, DataType outputType, string outputLocation)
@@ -21,10 +24,27 @@ namespace ClientForm
             OutputType = outputType;
             OutputLocation = outputLocation;
         }
+        public Flow(DataType inputType, HttpRequestMessage input, DataType outputType, HttpRequestMessage output)
+        {
+            InputType = inputType;
+            InputApiRequest = input;
+            OutputType = outputType;
+            OutputApiRequest = output;
+        }
 
         public override string ToString()
         {
-            return "[" + InputType + "] " + InputLocation.ToString() + "  ->  " + OutputLocation.ToString() + " [" + OutputType + "]"; 
+            string input;
+            string output;
+            if (InputType == DataType.REST)
+                input = InputApiRequest.RequestUri.ToString();
+            else
+                input = InputLocation;
+            if (OutputType == DataType.REST)
+                output = OutputApiRequest.RequestUri.ToString();
+            else
+                output = OutputLocation;
+            return "[" + InputType + "] " + input + "  ->  " + output + " [" + OutputType + "]"; 
         }
 
         internal Response<string> Run()
@@ -39,7 +59,7 @@ namespace ClientForm
                     response = new XmlHandler().XmlToJson(InputLocation);
                     break;
                 case DataType.REST:
-                    response = new RestApiHandler().RestApiToJson(); //TODO Implement
+                    response = new RestApiHandler().RestApiToJson(InputApiRequest); //TODO Implement
                     break;
             }
             if (response.Status != STATUS_CODE.OK)
@@ -50,7 +70,7 @@ namespace ClientForm
                     response = new HtmlHandler().JsonToHTML(response.Data, OutputLocation); //TODO Refactor
                     break;
                 case DataType.REST:
-                    response = new RestApiHandler().JsonToRestApi(response.Data,OutputLocation); //TODO Implement
+                    response = new RestApiHandler().JsonToRestApi(response.Data,OutputApiRequest); //TODO Implement
                     break;
             }
             return response;
