@@ -42,6 +42,8 @@ namespace ClientForm
                     response = new RestApiHandler().RestApiToJson(); //TODO Implement
                     break;
             }
+            if (response.Status != STATUS_CODE.OK)
+                return response;
             switch (OutputType)
             {
                 case DataType.HTML:
