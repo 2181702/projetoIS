@@ -23,5 +23,20 @@ namespace ClientForm
             }
             
         }
+
+        internal Response<string> JsonToXml(string data, string filePath)
+        {
+            try
+            {
+                data = "{root:" + data + "}";
+                XmlDocument doc = (XmlDocument)JsonConvert.DeserializeXmlNode(data);
+                doc.Save(filePath);
+                return new Response<string>(data + "\nSaved to file " + filePath, "Json -> XML | OK!", STATUS_CODE.OK);
+            }
+            catch (Exception e)
+            {
+                return new Response<string>("Unable to Serialize Xml Document: " + filePath, e.Message, STATUS_CODE.ERROR);
+            }
+        }
     }
 }

@@ -72,6 +72,9 @@ namespace ClientForm
                 case DataType.REST:
                     response = new RestApiHandler().JsonToRestApi(response.Data,OutputApiRequest); //TODO Implement
                     break;
+                case DataType.XML:
+                    response = new XmlHandler().JsonToXml(response.Data, OutputLocation);
+                    break;
             }
             return response;
         }

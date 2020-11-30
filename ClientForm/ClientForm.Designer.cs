@@ -37,6 +37,7 @@ namespace ClientForm
             this.radioInputXML = new System.Windows.Forms.RadioButton();
             this.radioInputRest = new System.Windows.Forms.RadioButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnInputRest = new System.Windows.Forms.Button();
             this.buttonOpenXml = new System.Windows.Forms.Button();
             this.buttonOpenExcel = new System.Windows.Forms.Button();
             this.textBoxInputRest = new System.Windows.Forms.TextBox();
@@ -55,9 +56,11 @@ namespace ClientForm
             this.textBoxOutputRest = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.buttonAddFlow = new System.Windows.Forms.Button();
-            this.btnInputRest = new System.Windows.Forms.Button();
             this.btnOutputRest = new System.Windows.Forms.Button();
+            this.buttonAddFlow = new System.Windows.Forms.Button();
+            this.radioOutputXml = new System.Windows.Forms.RadioButton();
+            this.textBoxOutputXml = new System.Windows.Forms.TextBox();
+            this.btnOutputXml = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -149,6 +152,16 @@ namespace ClientForm
             this.groupBox1.Size = new System.Drawing.Size(386, 226);
             this.groupBox1.TabIndex = 12;
             this.groupBox1.TabStop = false;
+            // 
+            // btnInputRest
+            // 
+            this.btnInputRest.Location = new System.Drawing.Point(297, 175);
+            this.btnInputRest.Name = "btnInputRest";
+            this.btnInputRest.Size = new System.Drawing.Size(35, 27);
+            this.btnInputRest.TabIndex = 11;
+            this.btnInputRest.Text = "...";
+            this.btnInputRest.UseVisualStyleBackColor = true;
+            this.btnInputRest.Click += new System.EventHandler(this.btnInputRest_Click);
             // 
             // buttonOpenXml
             // 
@@ -250,7 +263,7 @@ namespace ClientForm
             // 
             // buttonSaveHtml
             // 
-            this.buttonSaveHtml.Location = new System.Drawing.Point(741, 67);
+            this.buttonSaveHtml.Location = new System.Drawing.Point(312, 51);
             this.buttonSaveHtml.Name = "buttonSaveHtml";
             this.buttonSaveHtml.Size = new System.Drawing.Size(35, 27);
             this.buttonSaveHtml.TabIndex = 18;
@@ -261,7 +274,7 @@ namespace ClientForm
             // radioOutputHtml
             // 
             this.radioOutputHtml.AutoSize = true;
-            this.radioOutputHtml.Location = new System.Drawing.Point(468, 72);
+            this.radioOutputHtml.Location = new System.Drawing.Point(39, 56);
             this.radioOutputHtml.Name = "radioOutputHtml";
             this.radioOutputHtml.Size = new System.Drawing.Size(55, 17);
             this.radioOutputHtml.TabIndex = 20;
@@ -271,7 +284,7 @@ namespace ClientForm
             // 
             // textBoxOutputHtml
             // 
-            this.textBoxOutputHtml.Location = new System.Drawing.Point(543, 71);
+            this.textBoxOutputHtml.Location = new System.Drawing.Point(114, 55);
             this.textBoxOutputHtml.Name = "textBoxOutputHtml";
             this.textBoxOutputHtml.Size = new System.Drawing.Size(192, 20);
             this.textBoxOutputHtml.TabIndex = 15;
@@ -279,7 +292,7 @@ namespace ClientForm
             // radioOutputRest
             // 
             this.radioOutputRest.AutoSize = true;
-            this.radioOutputRest.Location = new System.Drawing.Point(468, 128);
+            this.radioOutputRest.Location = new System.Drawing.Point(39, 112);
             this.radioOutputRest.Name = "radioOutputRest";
             this.radioOutputRest.Size = new System.Drawing.Size(64, 17);
             this.radioOutputRest.TabIndex = 19;
@@ -289,7 +302,7 @@ namespace ClientForm
             // 
             // textBoxOutputRest
             // 
-            this.textBoxOutputRest.Location = new System.Drawing.Point(543, 127);
+            this.textBoxOutputRest.Location = new System.Drawing.Point(114, 111);
             this.textBoxOutputRest.Name = "textBoxOutputRest";
             this.textBoxOutputRest.Size = new System.Drawing.Size(192, 20);
             this.textBoxOutputRest.TabIndex = 16;
@@ -297,7 +310,7 @@ namespace ClientForm
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(465, 39);
+            this.label2.Location = new System.Drawing.Point(36, 23);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(83, 13);
@@ -306,12 +319,31 @@ namespace ClientForm
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.btnOutputXml);
+            this.groupBox2.Controls.Add(this.buttonSaveHtml);
+            this.groupBox2.Controls.Add(this.textBoxOutputXml);
+            this.groupBox2.Controls.Add(this.radioOutputHtml);
+            this.groupBox2.Controls.Add(this.textBoxOutputHtml);
+            this.groupBox2.Controls.Add(this.radioOutputXml);
+            this.groupBox2.Controls.Add(this.radioOutputRest);
             this.groupBox2.Controls.Add(this.btnOutputRest);
-            this.groupBox2.Location = new System.Drawing.Point(396, 12);
+            this.groupBox2.Controls.Add(this.textBoxOutputRest);
+            this.groupBox2.Controls.Add(this.label2);
+            this.groupBox2.Location = new System.Drawing.Point(404, 12);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(392, 226);
             this.groupBox2.TabIndex = 21;
             this.groupBox2.TabStop = false;
+            // 
+            // btnOutputRest
+            // 
+            this.btnOutputRest.Location = new System.Drawing.Point(312, 107);
+            this.btnOutputRest.Name = "btnOutputRest";
+            this.btnOutputRest.Size = new System.Drawing.Size(35, 27);
+            this.btnOutputRest.TabIndex = 12;
+            this.btnOutputRest.Text = "...";
+            this.btnOutputRest.UseVisualStyleBackColor = true;
+            this.btnOutputRest.Click += new System.EventHandler(this.btnOutputRest_Click);
             // 
             // buttonAddFlow
             // 
@@ -324,25 +356,33 @@ namespace ClientForm
             this.buttonAddFlow.UseVisualStyleBackColor = true;
             this.buttonAddFlow.Click += new System.EventHandler(this.buttonAddFlow_Click);
             // 
-            // btnInputRest
+            // radioOutputXml
             // 
-            this.btnInputRest.Location = new System.Drawing.Point(297, 175);
-            this.btnInputRest.Name = "btnInputRest";
-            this.btnInputRest.Size = new System.Drawing.Size(35, 27);
-            this.btnInputRest.TabIndex = 11;
-            this.btnInputRest.Text = "...";
-            this.btnInputRest.UseVisualStyleBackColor = true;
-            this.btnInputRest.Click += new System.EventHandler(this.btnInputRest_Click);
+            this.radioOutputXml.AutoSize = true;
+            this.radioOutputXml.Location = new System.Drawing.Point(39, 178);
+            this.radioOutputXml.Name = "radioOutputXml";
+            this.radioOutputXml.Size = new System.Drawing.Size(47, 17);
+            this.radioOutputXml.TabIndex = 13;
+            this.radioOutputXml.TabStop = true;
+            this.radioOutputXml.Text = "XML";
+            this.radioOutputXml.UseVisualStyleBackColor = false;
             // 
-            // btnOutputRest
+            // textBoxOutputXml
             // 
-            this.btnOutputRest.Location = new System.Drawing.Point(345, 111);
-            this.btnOutputRest.Name = "btnOutputRest";
-            this.btnOutputRest.Size = new System.Drawing.Size(35, 27);
-            this.btnOutputRest.TabIndex = 12;
-            this.btnOutputRest.Text = "...";
-            this.btnOutputRest.UseVisualStyleBackColor = true;
-            this.btnOutputRest.Click += new System.EventHandler(this.btnOutputRest_Click);
+            this.textBoxOutputXml.Location = new System.Drawing.Point(114, 177);
+            this.textBoxOutputXml.Name = "textBoxOutputXml";
+            this.textBoxOutputXml.Size = new System.Drawing.Size(192, 20);
+            this.textBoxOutputXml.TabIndex = 14;
+            // 
+            // btnOutputXml
+            // 
+            this.btnOutputXml.Location = new System.Drawing.Point(312, 175);
+            this.btnOutputXml.Name = "btnOutputXml";
+            this.btnOutputXml.Size = new System.Drawing.Size(35, 27);
+            this.btnOutputXml.TabIndex = 15;
+            this.btnOutputXml.Text = "...";
+            this.btnOutputXml.UseVisualStyleBackColor = true;
+            this.btnOutputXml.Click += new System.EventHandler(this.btnOutputXml_Click);
             // 
             // ClientForm
             // 
@@ -350,12 +390,6 @@ namespace ClientForm
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 515);
             this.Controls.Add(this.buttonAddFlow);
-            this.Controls.Add(this.buttonSaveHtml);
-            this.Controls.Add(this.radioOutputHtml);
-            this.Controls.Add(this.textBoxOutputHtml);
-            this.Controls.Add(this.radioOutputRest);
-            this.Controls.Add(this.textBoxOutputRest);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.buttonDeleteSaved);
             this.Controls.Add(this.buttonAddToRun);
             this.Controls.Add(this.buttonSaveFlow);
@@ -374,6 +408,7 @@ namespace ClientForm
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -409,6 +444,9 @@ namespace ClientForm
         private System.Windows.Forms.Button buttonAddFlow;
         private System.Windows.Forms.Button btnInputRest;
         private System.Windows.Forms.Button btnOutputRest;
+        private System.Windows.Forms.Button btnOutputXml;
+        private System.Windows.Forms.TextBox textBoxOutputXml;
+        private System.Windows.Forms.RadioButton radioOutputXml;
     }
 }
 

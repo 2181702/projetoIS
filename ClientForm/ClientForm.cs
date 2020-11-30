@@ -59,6 +59,10 @@ namespace ClientForm
                     flow.OutputType = DataType.REST;
                     flow.OutputApiRequest = tempOutputMessage;
                     break;
+                case DataType.XML:
+                    flow.OutputType = DataType.XML;
+                    flow.OutputLocation = textBoxOutputXml.Text;
+                    break;
                 default:
                     MessageBox.Show("No Output selected!");
                     return;
@@ -102,6 +106,10 @@ namespace ClientForm
             {
                 return DataType.REST;
             }
+            if (radioOutputXml.Checked)
+            {
+                return DataType.XML;
+            }
             return DataType.UNDEFINED;
         }
 
@@ -126,6 +134,13 @@ namespace ClientForm
             textBoxOutputHtml.Text = openFileDialog.FileName;
         }
 
+        private void btnOutputXml_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.ShowDialog();
+            textBoxOutputXml.Text = openFileDialog.FileName;
+        }
+
         private void buttonRun_Click(object sender, EventArgs e)
         {
             Response<string> response = new Response<string>();
@@ -140,10 +155,12 @@ namespace ClientForm
                     if (!DealWithResponse(response))
                         break;
                 }
-                //if (f.OutputType == DataType.REST)
-                    //MessageBox.Show(response.Data + "\n" + response.Message);
+                //Uncomment this lines to see server response [DEBUG purposes]
+                if (f.OutputType == DataType.REST)
+                    MessageBox.Show(response.Data + "\n" + response.Message);
+
             }
-            if(numErrors == 0)
+            if (numErrors == 0)
             {
                 MessageBox.Show("All flows runned successfully!");
             }
@@ -224,5 +241,7 @@ namespace ClientForm
             }
 
         }
+
+        
     }
 }
