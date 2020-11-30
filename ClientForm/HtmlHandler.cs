@@ -35,7 +35,7 @@ namespace ClientForm
             }
             catch(Exception e)
             {
-                return new Response<string>("NO JSON INFO AVALIBLE", "Not implemented yet!", STATUS_CODE.ERROR);
+                return new Response<string>("NO JSON INFO AVALIBLE", e.Message, STATUS_CODE.ERROR);
             }
         }
     }
