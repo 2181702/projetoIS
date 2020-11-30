@@ -140,6 +140,8 @@ namespace ClientForm
                     if (!DealWithResponse(response))
                         break;
                 }
+                //if (f.OutputType == DataType.REST)
+                    //MessageBox.Show(response.Data + "\n" + response.Message);
             }
             if(numErrors == 0)
             {
