@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -35,7 +37,31 @@ namespace ClientForm
 
         public Response<string> JsonToRestApi(string json, HttpRequestMessage request)
         {
-            return new Response<string>("NO JSON INFO AVALIBLE", "Not implemented yet!", STATUS_CODE.ERROR);
+            HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create(request.RequestUri);
+            try {
+                httpWebRequest.ContentType = "application/json";
+                httpWebRequest.Method = request.Method.ToString();
+
+                using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
+                {
+                    streamWriter.Write(json);
+                }
+            }catch(Exception e)
+            {
+                return new Response<string>("Unable to send message: ", "Unable to send message\nError:\n" + e.Message, STATUS_CODE.OK);
+            }
+            try { 
+                var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+                string result="";
+                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    result = streamReader.ReadToEnd();
+                }
+                return new Response<string>(result, "Everything ok", STATUS_CODE.OK);
+            }catch(Exception e)
+            {
+                return new Response<string>("No responsse", "No responsse\nError:\n" + e.Message, STATUS_CODE.OK);
+            }
         }
     }
 }
