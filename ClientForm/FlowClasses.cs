@@ -44,7 +44,7 @@ namespace ClientForm
                 output = OutputApiRequest.RequestUri.ToString();
             else
                 output = OutputLocation;
-            return "[" + InputType + "] " + input + "  ->  " + output + " [" + OutputType + "]"; 
+            return "[" + InputType + "] " + input + "  ->  " + output + " [" + OutputType + "]";
         }
 
         internal Response<string> Run()
@@ -70,7 +70,7 @@ namespace ClientForm
                     response = new HtmlHandler().JsonToHTML(response.Data, OutputLocation); //TODO Refactor
                     break;
                 case DataType.REST:
-                    response = new RestApiHandler().JsonToRestApi(response.Data,OutputApiRequest); //TODO Implement
+                    response = new RestApiHandler().JsonToRestApi(response.Data, OutputApiRequest); //TODO Implement
                     break;
                 case DataType.XML:
                     response = new XmlHandler().JsonToXml(response.Data, OutputLocation);
@@ -85,10 +85,12 @@ namespace ClientForm
         public static List<Flow> Flows { get; set; }
 
         private ClientForm clientForm;
+        private FlowFileHandler flowFileHandler;
 
-        public FlowHandler(ClientForm form)
+        public FlowHandler(ClientForm form, FlowFileHandler fileHandler)
         {
             clientForm = form;
+            flowFileHandler = fileHandler;
             Flows = new List<Flow>();
         }
 
@@ -109,7 +111,33 @@ namespace ClientForm
             clientForm.UpdateExistingFlows();
         }
 
+        public void SaveFlows()
+        {
+            Response<bool> updateResponse = flowFileHandler.UpdateSavedFlows(Flows);
+            clientForm.ShowMessage(updateResponse.Message);
+        }
+
+        public void LoadSavedFlows()
+        {
+            Response<List<Flow>> loadedFlows = flowFileHandler.GetSavedFlows();
+
+            if (loadedFlows.Status == STATUS_CODE.OK)
+            {
+                foreach (Flow flow in loadedFlows.Data)
+                {
+                    if (!Flows.Contains(flow))
+                    {
+                        Flows.Add(flow);
+                    }
+                }
+                clientForm.UpdateSavedFlows();
+            }
+
+            clientForm.ShowMessage(loadedFlows.Message);
+        }
     }
+
+
 
     public enum DataType
     {
@@ -141,6 +169,7 @@ namespace ClientForm
 
     public enum STATUS_CODE
     {
-        OK,ERROR, PARSING_ERROR
+        OK, ERROR, PARSING_ERROR
     }
 }
+

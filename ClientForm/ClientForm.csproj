@@ -64,6 +64,7 @@
     </Compile>
     <Compile Include="ExcelHandler.cs" />
     <Compile Include="FlowClasses.cs" />
+    <Compile Include="FlowFileHandler.cs" />
     <Compile Include="HtmlHandler.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

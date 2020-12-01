@@ -9,49 +9,29 @@ namespace ClientForm
 {
     class ExcelHandler
     {
-        private String xml;
 
         public Response<string> ExcelToJson(string excelFileLocation)
         {
             DataSet ds = new DataSet();
             try
             {
-                string Ext = Path.GetExtension(excelFileLocation);
-                string connectionString = "";
-                if (Ext == ".xls")
-                {
-                    connectionString = "Provider=Microsoft.Jet.OLEDB.4.0; Data Source =" + excelFileLocation + "; Extended Properties = 'Excel 8.0;HDR=YES'";
-                }
-                else if (Ext == ".xlsx")
-                {
-                    connectionString = "Provider=Microsoft.ACE.OLEDB.12.0; Data Source =" + excelFileLocation + "; Extended Properties = 'Excel 8.0;HDR=YES'";
-                }
+                string connectionString = GetConnectionString(excelFileLocation).Data;
+
                 OleDbConnection conn = new OleDbConnection(connectionString);
                 OleDbCommand cmd = new OleDbCommand();
                 OleDbDataAdapter dataAdapter = new OleDbDataAdapter();
 
                 cmd.Connection = conn;
 
-                //Fetch Fisrt Sheet Name  
-                conn.Open();
-                DataTable dtSchema;
-                dtSchema = conn.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null);
-                string ExcelSheetName = dtSchema.Rows[0]["TABLE_NAME"].ToString();
-                conn.Close();
+                string ExcelSheetName = FetchSheetName(conn);
 
-                //Read all data from the Sheet to a Data Table  
-                conn.Open();
+                // Updates and sets the query to read all data from the Sheet 
                 cmd.CommandText = "SELECT * From [" + ExcelSheetName + "]";
                 dataAdapter.SelectCommand = cmd;
 
-                dataAdapter.Fill(ds); // Fill Sheet Data to Dataset
-                conn.Close();
+                FillSheetData(ds, conn, dataAdapter);
 
-                XmlDocument xmlDoc = new XmlDocument();
-                xml = ds.GetXml();
-                xmlDoc.LoadXml(xml);
-                XmlNode xmlNode = xmlDoc.DocumentElement;
-
+                XmlNode xmlNode = GetXmlNode(ds.GetXml());
                 return new Response<string>(JsonConvert.SerializeXmlNode(xmlNode), "Excel -> Json | OK!", STATUS_CODE.OK);
             }
             catch (Exception e)
@@ -59,6 +39,48 @@ namespace ClientForm
                 return new Response<string>("Unable to Serialize Excel Document: " + excelFileLocation, e.Message, STATUS_CODE.ERROR);
             }
         }
+
+        private Response<string> GetConnectionString(string excelFileLocation)
+        {
+            string Ext = Path.GetExtension(excelFileLocation);
+
+            if (Ext == ".xls")
+            {
+                return new Response<string>("Provider=Microsoft.Jet.OLEDB.4.0; Data Source =" + excelFileLocation + "; Extended Properties = 'Excel 8.0;HDR=YES'", STATUS_CODE.OK);
+            }
+            else if (Ext == ".xlsx")
+            {
+                return new Response<string>("Provider=Microsoft.ACE.OLEDB.12.0; Data Source =" + excelFileLocation + "; Extended Properties = 'Excel 8.0;HDR=YES'", STATUS_CODE.OK);
+            }
+            else
+            {
+                return new Response<string>("Failed to get the connection string.", STATUS_CODE.ERROR);
+            }
+        }
+
+        private string FetchSheetName(OleDbConnection conn)
+        {
+            conn.Open();
+            DataTable dtSchema = conn.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null);
+            string ExcelSheetName = dtSchema.Rows[0]["TABLE_NAME"].ToString();
+            conn.Close();
+            return ExcelSheetName;
+        }
+
+        private void FillSheetData(DataSet ds, OleDbConnection conn, OleDbDataAdapter dataAdapter)
+        {
+            conn.Open();
+            dataAdapter.Fill(ds); // Fill Sheet Data to Dataset
+            conn.Close();
+        }
+
+        private XmlNode GetXmlNode(string dataSetXml)
+        {
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.LoadXml(dataSetXml);
+            return xmlDoc.DocumentElement;
+        }
+
     }
 }
 

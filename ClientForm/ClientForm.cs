@@ -20,7 +20,7 @@ namespace ClientForm
         public ClientForm()
         {
             InitializeComponent();
-            flowHandler = new FlowHandler(this);
+            flowHandler = new FlowHandler(this, new FlowFileHandler());
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -94,6 +94,21 @@ namespace ClientForm
                 return DataType.REST;
             }
             return DataType.UNDEFINED;
+        }
+
+        internal void UpdateSavedFlows()
+        {
+            listBoxSavedFlows.Items.Clear();
+            foreach (Flow f in flowHandler.GetFlows())
+            {
+                listBoxSavedFlows.Items.Add(f);
+            }
+        }
+
+
+        internal void ShowMessage(string text)
+        {
+            MessageBox.Show(text);
         }
 
         private DataType GetSelectedOutput()
@@ -242,6 +257,18 @@ namespace ClientForm
 
         }
 
-        
+
+
+        private void buttonExportFlows_Click(object sender, EventArgs e)
+        {
+            flowHandler.SaveFlows();
+        }
+
+        private void buttonImportFlows_Click(object sender, EventArgs e)
+        {
+            flowHandler.LoadSavedFlows();
+        }
+
+
     }
 }
