@@ -131,6 +131,7 @@ namespace ClientForm
         private void buttonOpenExcel_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Excel Worksheets| *.xls;*.xlsx";
             openFileDialog.ShowDialog();
             textBoxInputExcel.Text = openFileDialog.FileName;
         }
@@ -138,6 +139,7 @@ namespace ClientForm
         private void buttonOpenXml_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "XML Files| *.xml";
             openFileDialog.ShowDialog();
             textBoxInputXml.Text = openFileDialog.FileName;
         }
@@ -145,6 +147,7 @@ namespace ClientForm
         private void buttonSaveHtml_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "HTML Documents| *.html";
             openFileDialog.ShowDialog();
             textBoxOutputHtml.Text = openFileDialog.FileName;
         }
@@ -152,6 +155,7 @@ namespace ClientForm
         private void btnOutputXml_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "XML Files| *.xml";
             openFileDialog.ShowDialog();
             textBoxOutputXml.Text = openFileDialog.FileName;
         }
@@ -246,8 +250,8 @@ namespace ClientForm
         {
             Response<HttpRequestMessage> response = new ApiRequestFormHandler(this).GetRestRequest(); 
             if (response.Status == STATUS_CODE.OK)
-            {
-                textBoxInputRest.Text = response.Data.RequestUri.ToString();
+            {   
+                textBoxInputRest.Text = "["+response.Data.Method.ToString()+"] "+response.Data.RequestUri.ToString();
                 tempInputMessage = response.Data;
             }
             else
@@ -256,8 +260,6 @@ namespace ClientForm
             }
 
         }
-
-
 
         private void buttonExportFlows_Click(object sender, EventArgs e)
         {

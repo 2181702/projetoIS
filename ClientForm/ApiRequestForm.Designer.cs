@@ -44,25 +44,28 @@ namespace ClientForm
             // 
             // txtBoxUrl
             // 
-            this.txtBoxUrl.Location = new System.Drawing.Point(18, 38);
+            this.txtBoxUrl.Location = new System.Drawing.Point(100, 49);
+            this.txtBoxUrl.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtBoxUrl.Name = "txtBoxUrl";
-            this.txtBoxUrl.Size = new System.Drawing.Size(327, 20);
+            this.txtBoxUrl.Size = new System.Drawing.Size(360, 22);
             this.txtBoxUrl.TabIndex = 0;
             // 
             // lblUrl
             // 
             this.lblUrl.AutoSize = true;
-            this.lblUrl.Location = new System.Drawing.Point(21, 14);
+            this.lblUrl.Location = new System.Drawing.Point(28, 17);
+            this.lblUrl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblUrl.Name = "lblUrl";
-            this.lblUrl.Size = new System.Drawing.Size(29, 13);
+            this.lblUrl.Size = new System.Drawing.Size(35, 16);
             this.lblUrl.TabIndex = 1;
             this.lblUrl.Text = "URL";
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(215, 9);
+            this.btnSave.Location = new System.Drawing.Point(148, 351);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(130, 23);
+            this.btnSave.Size = new System.Drawing.Size(173, 28);
             this.btnSave.TabIndex = 2;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
@@ -71,9 +74,10 @@ namespace ClientForm
             // comboBoxMethods
             // 
             this.comboBoxMethods.FormattingEnabled = true;
-            this.comboBoxMethods.Location = new System.Drawing.Point(56, 11);
+            this.comboBoxMethods.Location = new System.Drawing.Point(24, 47);
+            this.comboBoxMethods.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.comboBoxMethods.Name = "comboBoxMethods";
-            this.comboBoxMethods.Size = new System.Drawing.Size(137, 21);
+            this.comboBoxMethods.Size = new System.Drawing.Size(67, 24);
             this.comboBoxMethods.TabIndex = 3;
             // 
             // gpBoxHeaders
@@ -83,9 +87,11 @@ namespace ClientForm
             this.gpBoxHeaders.Controls.Add(this.btnAddHeader);
             this.gpBoxHeaders.Controls.Add(this.txtBoxHeaderData);
             this.gpBoxHeaders.Controls.Add(this.txtBoxHeader);
-            this.gpBoxHeaders.Location = new System.Drawing.Point(12, 74);
+            this.gpBoxHeaders.Location = new System.Drawing.Point(16, 91);
+            this.gpBoxHeaders.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.gpBoxHeaders.Name = "gpBoxHeaders";
-            this.gpBoxHeaders.Size = new System.Drawing.Size(339, 205);
+            this.gpBoxHeaders.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gpBoxHeaders.Size = new System.Drawing.Size(452, 252);
             this.gpBoxHeaders.TabIndex = 4;
             this.gpBoxHeaders.TabStop = false;
             this.gpBoxHeaders.Text = "Headers";
@@ -93,16 +99,19 @@ namespace ClientForm
             // listBoxHeaders
             // 
             this.listBoxHeaders.FormattingEnabled = true;
-            this.listBoxHeaders.Location = new System.Drawing.Point(6, 75);
+            this.listBoxHeaders.ItemHeight = 16;
+            this.listBoxHeaders.Location = new System.Drawing.Point(8, 92);
+            this.listBoxHeaders.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.listBoxHeaders.Name = "listBoxHeaders";
-            this.listBoxHeaders.Size = new System.Drawing.Size(327, 121);
+            this.listBoxHeaders.Size = new System.Drawing.Size(435, 148);
             this.listBoxHeaders.TabIndex = 4;
             // 
             // btnRemoveHeader
             // 
-            this.btnRemoveHeader.Location = new System.Drawing.Point(178, 45);
+            this.btnRemoveHeader.Location = new System.Drawing.Point(237, 55);
+            this.btnRemoveHeader.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnRemoveHeader.Name = "btnRemoveHeader";
-            this.btnRemoveHeader.Size = new System.Drawing.Size(155, 23);
+            this.btnRemoveHeader.Size = new System.Drawing.Size(207, 28);
             this.btnRemoveHeader.TabIndex = 3;
             this.btnRemoveHeader.Text = "Remove";
             this.btnRemoveHeader.UseVisualStyleBackColor = true;
@@ -110,9 +119,10 @@ namespace ClientForm
             // 
             // btnAddHeader
             // 
-            this.btnAddHeader.Location = new System.Drawing.Point(6, 45);
+            this.btnAddHeader.Location = new System.Drawing.Point(8, 55);
+            this.btnAddHeader.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnAddHeader.Name = "btnAddHeader";
-            this.btnAddHeader.Size = new System.Drawing.Size(166, 23);
+            this.btnAddHeader.Size = new System.Drawing.Size(221, 28);
             this.btnAddHeader.TabIndex = 2;
             this.btnAddHeader.Text = "Add";
             this.btnAddHeader.UseVisualStyleBackColor = true;
@@ -120,28 +130,31 @@ namespace ClientForm
             // 
             // txtBoxHeaderData
             // 
-            this.txtBoxHeaderData.Location = new System.Drawing.Point(119, 19);
+            this.txtBoxHeaderData.Location = new System.Drawing.Point(159, 23);
+            this.txtBoxHeaderData.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtBoxHeaderData.Name = "txtBoxHeaderData";
-            this.txtBoxHeaderData.Size = new System.Drawing.Size(214, 20);
+            this.txtBoxHeaderData.Size = new System.Drawing.Size(284, 22);
             this.txtBoxHeaderData.TabIndex = 1;
             // 
             // txtBoxHeader
             // 
-            this.txtBoxHeader.Location = new System.Drawing.Point(6, 19);
+            this.txtBoxHeader.Location = new System.Drawing.Point(8, 23);
+            this.txtBoxHeader.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtBoxHeader.Name = "txtBoxHeader";
-            this.txtBoxHeader.Size = new System.Drawing.Size(107, 20);
+            this.txtBoxHeader.Size = new System.Drawing.Size(141, 22);
             this.txtBoxHeader.TabIndex = 0;
             // 
             // ApiRequestForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(363, 291);
+            this.ClientSize = new System.Drawing.Size(484, 386);
             this.Controls.Add(this.gpBoxHeaders);
             this.Controls.Add(this.comboBoxMethods);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.lblUrl);
             this.Controls.Add(this.txtBoxUrl);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "ApiRequestForm";
             this.Text = "ApiRequestForm";
             this.Load += new System.EventHandler(this.ApiRequestForm_Load);

@@ -14,6 +14,8 @@ namespace ClientForm
     public partial class ApiRequestForm : Form
     {
         private List<LocalHeader> headers;
+        private String url ="";
+
         public ApiRequestForm()
         {
             InitializeComponent();
@@ -24,14 +26,26 @@ namespace ClientForm
         {
             comboBoxMethods.DataSource = Enum.GetValues(typeof(HttpMethods));
             headers = new List<LocalHeader>();
+            txtBoxUrl.Text = this.url;
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            HttpMethods methods;
-            Enum.TryParse<HttpMethods>(comboBoxMethods.SelectedValue.ToString(), out methods);
-            new ApiRequestFormHandler().UpdateRequest(ToDictionary(headers), methods, txtBoxUrl.Text);
-            Close();
+            Uri uriResult;
+            bool result = Uri.TryCreate(txtBoxUrl.Text, UriKind.Absolute, out uriResult) && (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps);
+
+            if (result)
+            {
+                this.url = txtBoxUrl.Text;
+                HttpMethods methods;
+                Enum.TryParse<HttpMethods>(comboBoxMethods.SelectedValue.ToString(), out methods);
+                new ApiRequestFormHandler().UpdateRequest(ToDictionary(headers), methods, txtBoxUrl.Text);
+                Close();
+            }
+            else
+            {
+                MessageBox.Show("Invalid URL");
+            }
         }
 
         private void btnAddHeader_Click(object sender, EventArgs e)
