@@ -23,10 +23,11 @@ namespace ClientForm
                 {
                     using (StreamWriter w = new StreamWriter(fs, Encoding.UTF8))
                     {
-                        w.WriteLine("<!DOCTYPE html>\n<html>\n<body>\n\t<div id='root'>");
+                        w.WriteLine("<!DOCTYPE html>\n<html>\n<body>\n\t<div style='font-family:courier;font-weight:bold;background-color: #f5f5f5;border-color: #ccc;border-style: solid;border-width: 1px;box-sizing: border-box;color:black;/*height: 300px;*/margin: 1px 0;overflow: auto;padding: 9px;' id='root'>");
                         w.WriteLine("\t</div>\n</body>\n</html>");
                         w.WriteLine("<script src= 'https://cdn.rawgit.com/caldwell/renderjson/master/renderjson.js'></script>");
-                         w.WriteLine("<script>const data = JSON.parse('" + json + "'); console.log(data); document.getElementById('root').appendChild(renderjson(data)) </script>");
+                         w.WriteLine("<script>const data = JSON.parse('" + json + "'); console.log(data); document.getElementById('root').appendChild(renderjson(data));renderjson.set_icons('>', '^');; </script>");
+                        
                         w.WriteLine("<script src='/path/to/dist/jsonview.bundle.js'></script>");
                         //w.WriteLine(json);
                     }
