@@ -30,18 +30,17 @@ namespace ClientForm
             return response;
         }
 
-        public void UpdateRequest(Dictionary<string, string> headers, HttpMethods method, string url)
+        public void UpdateRequest(HttpRequestHeaders headers, HttpMethods method, string url)
         {
             var request = new HttpRequestMessage()
             {
                 Method = GetMethodFromEnum(method),
                 RequestUri = new Uri(url)
+                
             };
-            foreach (string k in headers.Keys)
+            foreach(var h in headers)
             {
-                string data;
-                headers.TryGetValue(k, out data);
-                request.Headers.Add(k, data);
+                request.Headers.Add(h.Key,h.Value);
             }
             response = new Response<HttpRequestMessage>(request,"All Ok",STATUS_CODE.OK);
         }
