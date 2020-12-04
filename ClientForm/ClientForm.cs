@@ -17,6 +17,9 @@ namespace ClientForm
 
         private HttpRequestMessage tempInputMessage;
         private HttpRequestMessage tempOutputMessage;
+        private bool OpeningForInput; //Since the ApiRequestForm doesn't have a state, and it works for both inputandpoutput, it needs to know which one is being opened
+
+
         public ClientForm()
         {
             InitializeComponent();
@@ -215,6 +218,7 @@ namespace ClientForm
 
         private void btnOutputRest_Click(object sender, EventArgs e)
         {
+            OpeningForInput = false;
             Response<HttpRequestMessage> response = new ApiRequestFormHandler(this).GetRestRequest();
             if(response.Status == STATUS_CODE.OK)
             {
@@ -229,6 +233,7 @@ namespace ClientForm
 
         private void btnInputRest_Click(object sender, EventArgs e)
         {
+            OpeningForInput = true;
             Response<HttpRequestMessage> response = new ApiRequestFormHandler(this).GetRestRequest(); 
             if (response.Status == STATUS_CODE.OK)
             {

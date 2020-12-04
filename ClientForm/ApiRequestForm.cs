@@ -13,8 +13,10 @@ namespace ClientForm
 {
     public partial class ApiRequestForm : Form
     {
-        private List<LocalHeader> headers;
-        public ApiRequestForm()
+        ClientForm clientForm;
+        HttpRequestMessage PreviousMessage;
+
+        public ApiRequestForm(ClientForm cf)
         {
             InitializeComponent();
             
@@ -22,29 +24,40 @@ namespace ClientForm
 
         private void ApiRequestForm_Load(object sender, EventArgs e)
         {
+            if (clientForm.IsItInput())
+            {
+                PreviousMessage = clientForm.getTempInputRequest();
+            }
+            else
+            {
+                PreviousMessage = clientForm.getTempOutputRequest();
+            }
             comboBoxMethods.DataSource = Enum.GetValues(typeof(HttpMethods));
-            headers = new List<LocalHeader>();
+            if(PreviousMessage != null)
+            {
+                txtBoxUrl.Text = PreviousMessage.RequestUri.ToString();
+                UpdateListBoxHeaders();
+                comboBoxMethods.SelectedItem = clientForm.getMethod();
+            }
+            
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            HttpMethods methods;
-            Enum.TryParse<HttpMethods>(comboBoxMethods.SelectedValue.ToString(), out methods);
-            new ApiRequestFormHandler().UpdateRequest(ToDictionary(headers), methods, txtBoxUrl.Text);
-            Close();
-        }
+            Uri uriResult;
+            bool result = Uri.TryCreate(txtBoxUrl.Text, UriKind.Absolute, out uriResult) && (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps);
 
-        private void btnAddHeader_Click(object sender, EventArgs e)
-        {
-            headers.Add(new LocalHeader(txtBoxHeader.Text,txtBoxHeaderData.Text));
-            UpdateListBoxHeaders();
-            
-        }
-
-        private void btnRemoveHeader_Click(object sender, EventArgs e)
-        {
-            headers.Remove((LocalHeader)listBoxHeaders.SelectedItem);
-            UpdateListBoxHeaders();
+            if (result)
+            {
+                HttpMethods methods;
+                Enum.TryParse<HttpMethods>(comboBoxMethods.SelectedValue.ToString(), out methods);
+                new ApiRequestFormHandler().UpdateRequest(ToDictionary(), methods, txtBoxUrl.Text);
+                Close();
+            }
+            else
+            {
+                MessageBox.Show("Invalid URL");
+            }
         }
 
         private void UpdateListBoxHeaders()
