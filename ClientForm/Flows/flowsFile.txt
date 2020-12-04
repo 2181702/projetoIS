@@ -1,1 +1,0 @@
-{"InputType":1,"InputLocation":"C:\\Users\\Pierre\\Desktop\\test1.xlsx","InputApiRequest":null,"OutputType":5,"OutputLocation":"C:\\Users\\Pierre\\Desktop\\test1.xlsx","OutputApiRequest":null}
