@@ -44,9 +44,9 @@ namespace ClientForm
             // 
             // txtBoxUrl
             // 
-            this.txtBoxUrl.Location = new System.Drawing.Point(18, 38);
+            this.txtBoxUrl.Location = new System.Drawing.Point(165, 11);
             this.txtBoxUrl.Name = "txtBoxUrl";
-            this.txtBoxUrl.Size = new System.Drawing.Size(327, 20);
+            this.txtBoxUrl.Size = new System.Drawing.Size(186, 20);
             this.txtBoxUrl.TabIndex = 0;
             // 
             // lblUrl
@@ -60,7 +60,7 @@ namespace ClientForm
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(215, 9);
+            this.btnSave.Location = new System.Drawing.Point(109, 249);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(130, 23);
             this.btnSave.TabIndex = 2;
@@ -73,7 +73,7 @@ namespace ClientForm
             this.comboBoxMethods.FormattingEnabled = true;
             this.comboBoxMethods.Location = new System.Drawing.Point(56, 11);
             this.comboBoxMethods.Name = "comboBoxMethods";
-            this.comboBoxMethods.Size = new System.Drawing.Size(137, 21);
+            this.comboBoxMethods.Size = new System.Drawing.Size(103, 21);
             this.comboBoxMethods.TabIndex = 3;
             // 
             // gpBoxHeaders
@@ -83,7 +83,7 @@ namespace ClientForm
             this.gpBoxHeaders.Controls.Add(this.btnAddHeader);
             this.gpBoxHeaders.Controls.Add(this.txtBoxHeaderData);
             this.gpBoxHeaders.Controls.Add(this.txtBoxHeader);
-            this.gpBoxHeaders.Location = new System.Drawing.Point(12, 74);
+            this.gpBoxHeaders.Location = new System.Drawing.Point(12, 38);
             this.gpBoxHeaders.Name = "gpBoxHeaders";
             this.gpBoxHeaders.Size = new System.Drawing.Size(339, 205);
             this.gpBoxHeaders.TabIndex = 4;
@@ -136,7 +136,7 @@ namespace ClientForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(363, 291);
+            this.ClientSize = new System.Drawing.Size(363, 280);
             this.Controls.Add(this.gpBoxHeaders);
             this.Controls.Add(this.comboBoxMethods);
             this.Controls.Add(this.btnSave);

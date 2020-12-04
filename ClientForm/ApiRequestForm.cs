@@ -99,7 +99,15 @@ namespace ClientForm
             }
         }
 
-      
+        private void btnRemoveHeader_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnAddHeader_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 
     /**

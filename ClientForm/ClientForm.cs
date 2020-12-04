@@ -247,6 +247,18 @@ namespace ClientForm
 
         }
 
-        
+        public HttpRequestMessage getTempInputRequest()
+        {
+            return tempInputMessage;
+        }
+
+        public HttpRequestMessage getTempOutputRequest()
+        {
+            return tempOutputMessage;
+        }
+        public bool IsItInput()
+        {
+            return OpeningForInput;
+        }
     }
 }
