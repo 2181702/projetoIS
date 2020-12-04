@@ -1,82 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace ClientForm
 {
     public class Flow
     {
-        public DataType InputType { get; set; }
-        public String InputLocation { get; set; }
-        public HttpRequestMessage InputApiRequest { get; set; }
-        public DataType OutputType { get; set; }
-        public String OutputLocation { get; set; }
-        public HttpRequestMessage OutputApiRequest { get; set; }
+        public InputType Input { get; set; }
+        public OutputType Output { get; set; }
 
-        public Flow() { }
-        public Flow(DataType inputType, string inputLocation, DataType outputType, string outputLocation)
+        public Flow(InputType _input, OutputType _output)
         {
-            InputType = inputType;
-            InputLocation = inputLocation;
-            OutputType = outputType;
-            OutputLocation = outputLocation;
+            Input = _input;
+            Output = _output;
         }
-        public Flow(DataType inputType, HttpRequestMessage input, DataType outputType, HttpRequestMessage output)
-        {
-            InputType = inputType;
-            InputApiRequest = input;
-            OutputType = outputType;
-            OutputApiRequest = output;
-        }
+
 
         public override string ToString()
         {
-            string input;
-            string output;
-            if (InputType == DataType.REST)
-                input = InputApiRequest.RequestUri.ToString();
-            else
-                input = InputLocation;
-            if (OutputType == DataType.REST)
-                output = OutputApiRequest.RequestUri.ToString();
-            else
-                output = OutputLocation;
-            return "[" + InputType + "] " + input + "  ->  " + output + " [" + OutputType + "]";
+            return Input.ToString() + " -> " + Output.ToString();
         }
 
         internal Response<string> Run()
-        {
-            Response<string> response = new Response<string>();
-            switch (InputType)
-            {
-                case DataType.EXCEL:
-                    response = new ExcelHandler().ExcelToJson(InputLocation);
-                    break;
-                case DataType.XML:
-                    response = new XmlHandler().XmlToJson(InputLocation);
-                    break;
-                case DataType.REST:
-                    response = new RestApiHandler().RestApiToJson(InputApiRequest); //TODO Implement
-                    break;
-            }
-            if (response.Status != STATUS_CODE.OK)
-                return response;
-            switch (OutputType)
-            {
-                case DataType.HTML:
-                    response = new HtmlHandler().JsonToHTML(response.Data, OutputLocation); //TODO Refactor
-                    break;
-                case DataType.REST:
-                    response = new RestApiHandler().JsonToRestApi(response.Data, OutputApiRequest); //TODO Implement
-                    break;
-                case DataType.XML:
-                    response = new XmlHandler().JsonToXml(response.Data, OutputLocation);
-                    break;
-            }
-            return response;
+        { 
+            return Output.Run(Input.Run());
         }
     }
 
@@ -113,7 +58,19 @@ namespace ClientForm
 
         public void SaveFlows()
         {
-            Response<bool> updateResponse = flowFileHandler.UpdateSavedFlows(Flows);
+            List<Flow> _flows = new List<Flow>(Flows);
+            if(!clientForm.AskMessage("Override?","Want to override previously saved flows?\nIf no, it will append current flows to the file\nIf yes, it will save current flows overriding previously saved ones"))
+            {
+                Response<List<Flow>> loadedFlows = flowFileHandler.GetSavedFlows();
+                foreach (Flow flow in loadedFlows.Data)
+                {
+                    if (!_flows.Contains(flow))
+                    {
+                        Flows.Add(flow);
+                    }
+                }
+            }
+            Response<bool> updateResponse = flowFileHandler.UpdateSavedFlows(_flows);
             clientForm.ShowMessage(updateResponse.Message);
         }
 

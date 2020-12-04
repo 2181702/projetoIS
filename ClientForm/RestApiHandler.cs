@@ -6,16 +6,19 @@ using System.Threading.Tasks;
 
 namespace ClientForm
 {
-    internal class RestApiHandler
+    class RestApiHandlerInput : InputType
     {
-        public RestApiHandler()
+        public HttpRequestMessage Location { get; set; }
+
+        public RestApiHandlerInput(HttpRequestMessage _request)
         {
+            Location = _request;
+        }
+        public override Response<string> Run()
+        {
+            return SendRequestAsync(Location).Result;
         }
 
-        internal Response<string> RestApiToJson(HttpRequestMessage request)
-        {
-            return SendRequestAsync(request).Result;
-        }
 
         private async Task<Response<string>> SendRequestAsync(HttpRequestMessage request)
         {
@@ -35,33 +38,55 @@ namespace ClientForm
             }
         }
 
-        public Response<string> JsonToRestApi(string json, HttpRequestMessage request)
+        public override string ToString()
         {
-            HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create(request.RequestUri);
-            try {
+            return $"[API]{Location.RequestUri}";
+        }
+    }
+
+    class RestApiHandlerOutput : OutputType
+    {
+        public HttpRequestMessage Location { get; set; }
+
+        public RestApiHandlerOutput(HttpRequestMessage _request)
+        {
+            Location = _request;
+        }
+        public override Response<string> Run(Response<string> json)
+        {
+            HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create(Location.RequestUri);
+            try
+            {
                 httpWebRequest.ContentType = "application/json";
-                httpWebRequest.Method = request.Method.ToString();
+                httpWebRequest.Method = Location.Method.ToString();
 
                 using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
                 {
                     streamWriter.Write(json);
                 }
-            }catch(Exception e)
+            }
+            catch (Exception e)
             {
                 return new Response<string>("Unable to send message: ", "Unable to send message\nError:\n" + e.Message, STATUS_CODE.OK);
             }
-            try { 
+            try
+            {
                 var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
-                string result="";
+                string result = "";
                 using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
                 {
                     result = streamReader.ReadToEnd();
                 }
                 return new Response<string>(result, "Everything ok", STATUS_CODE.OK);
-            }catch(Exception e)
+            }
+            catch (Exception e)
             {
                 return new Response<string>("No responsse", "No responsse\nError:\n" + e.Message, STATUS_CODE.OK);
             }
+        }
+        public override string ToString()
+        {
+            return $"{Location.RequestUri}[API]";
         }
     }
 }

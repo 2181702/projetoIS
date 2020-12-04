@@ -35,44 +35,39 @@ namespace ClientForm
 
         private void buttonAddFlow_Click(object sender, EventArgs e)
         {
-            Flow flow = new Flow();
+            InputType input;
             switch(GetSelectedInput())
             {
                 case DataType.EXCEL:
-                    flow.InputType = DataType.EXCEL;
-                    flow.InputLocation = textBoxInputExcel.Text;
+                    input = new ExcelHandler(textBoxInputExcel.Text);
                     break;
                 case DataType.REST:
-                    flow.InputType = DataType.REST;
-                    flow.InputApiRequest = tempInputMessage;
+                    input = new RestApiHandlerInput(tempInputMessage);
                     break;
                 case DataType.XML:
-                    flow.InputType = DataType.XML;
-                    flow.InputLocation = textBoxInputXml.Text;
+                    input = new XmlHandlerInput(textBoxInputXml.Text);
                     break;
                 default:
                     MessageBox.Show("No Input selected!");
                     return;
             }
+            OutputType output;
             switch (GetSelectedOutput())
             {
                 case DataType.HTML:
-                    flow.OutputType = DataType.HTML;
-                    flow.OutputLocation = textBoxOutputHtml.Text;
+                    output = new HtmlHandler(textBoxOutputHtml.Text);
                     break;
                 case DataType.REST:
-                    flow.OutputType = DataType.REST;
-                    flow.OutputApiRequest = tempOutputMessage;
+                    output = new RestApiHandlerOutput(tempOutputMessage);
                     break;
                 case DataType.XML:
-                    flow.OutputType = DataType.XML;
-                    flow.OutputLocation = textBoxOutputXml.Text;
+                    output = new XmlHandlerOutput(textBoxOutputXml.Text);
                     break;
                 default:
                     MessageBox.Show("No Output selected!");
                     return;
             }
-            flowHandler.AddFlow(flow);
+            flowHandler.AddFlow(new Flow(input,output));
         }
 
         internal void UpdateExistingFlows()
@@ -114,6 +109,16 @@ namespace ClientForm
         internal void ShowMessage(string text)
         {
             MessageBox.Show(text);
+        }
+
+        internal bool AskMessage(string title, string message)
+        {
+            DialogResult dialogResult = MessageBox.Show(message,title, MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                return true;
+            }
+            return false;
         }
 
         private DataType GetSelectedOutput()
@@ -180,9 +185,6 @@ namespace ClientForm
                         break;
                 }
                 //Uncomment this lines to see server response [DEBUG purposes]
-                if (f.OutputType == DataType.REST)
-                    MessageBox.Show(response.Data + "\n" + response.Message);
-
             }
             if (numErrors == 0)
             {

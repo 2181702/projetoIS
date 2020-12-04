@@ -12,7 +12,7 @@ namespace ClientForm
     public class FlowFileHandler
     {
         private string DIRECTORY_PATH;
-        private const string FILE_NAME = "flowsFile.txt";
+        private const string FILE_NAME = "saved.flows";
 
         private const char FILE_FLOW_SPLITTER = ';';
 
@@ -55,7 +55,7 @@ namespace ClientForm
             }
             catch (Exception e)
             {
-                return new Response<List<Flow>>(new List<Flow>(), "An error has occurred while trying to get the flows from the file.\nPlease try again.", STATUS_CODE.ERROR);
+                return new Response<List<Flow>>(new List<Flow>(), $"{e.Message}\nAn error has occurred while trying to get the flows from the file.\nPlease try again.", STATUS_CODE.ERROR);
             }
 
         }
@@ -103,7 +103,7 @@ namespace ClientForm
             }
             catch (Exception e)
             {
-                return new Response<bool>(true, "An error has occurred while trying to update the flows file.\nPlease try again.", STATUS_CODE.ERROR);
+                return new Response<bool>(true, $"{e.Message}\nAn error has occurred while trying to update the flows file.\nPlease try again.", STATUS_CODE.ERROR);
             }
 
         }
