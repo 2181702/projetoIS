@@ -106,6 +106,16 @@ namespace ClientForm
             MessageBox.Show(text);
         }
 
+        internal bool AskMessage(string title, string message)
+        {
+            DialogResult dialogResult = MessageBox.Show(message,title, MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                return true;
+            }
+            return false;
+        }
+
         private DataType GetSelectedOutput()
         {
             if (radioOutputHtml.Checked)

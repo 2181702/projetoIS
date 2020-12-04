@@ -58,7 +58,19 @@ namespace ClientForm
 
         public void SaveFlows()
         {
-            Response<bool> updateResponse = flowFileHandler.UpdateSavedFlows(Flows);
+            List<Flow> _flows = new List<Flow>(Flows);
+            if(!clientForm.AskMessage("Override?","Want to override previously saved flows?\nIf no, it will append current flows to the file\nIf yes, it will save current flows overriding previously saved ones"))
+            {
+                Response<List<Flow>> loadedFlows = flowFileHandler.GetSavedFlows();
+                foreach (Flow flow in loadedFlows.Data)
+                {
+                    if (!_flows.Contains(flow))
+                    {
+                        Flows.Add(flow);
+                    }
+                }
+            }
+            Response<bool> updateResponse = flowFileHandler.UpdateSavedFlows(_flows);
             clientForm.ShowMessage(updateResponse.Message);
         }
 
