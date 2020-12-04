@@ -25,7 +25,7 @@ namespace ClientForm
 
         public Response<HttpRequestMessage> GetRestRequest()
         {
-            ApiRequestForm requestForm = new ApiRequestForm();
+            ApiRequestForm requestForm = new ApiRequestForm(client);
             requestForm.ShowDialog();
             return response;
         }
