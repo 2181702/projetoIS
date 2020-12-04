@@ -1,32 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ClientForm
-{
+{   
     public partial class ApiRequestForm : Form
     {
-        private List<LocalHeader> headers;
-        private String url ="";
+        ClientForm clientForm;
 
-        public ApiRequestForm()
+        public ApiRequestForm(ClientForm cf)
         {
             InitializeComponent();
-            
+            clientForm = cf;
         }
 
         private void ApiRequestForm_Load(object sender, EventArgs e)
         {
             comboBoxMethods.DataSource = Enum.GetValues(typeof(HttpMethods));
-            headers = new List<LocalHeader>();
-            txtBoxUrl.Text = this.url;
+            txtBoxUrl.Text = clientForm.getUrl();
+            UpdateListBoxHeaders();
+            comboBoxMethods.SelectedItem = clientForm.getMethod();
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -36,10 +29,11 @@ namespace ClientForm
 
             if (result)
             {
-                this.url = txtBoxUrl.Text;
+                clientForm.setUrl(txtBoxUrl.Text);
                 HttpMethods methods;
                 Enum.TryParse<HttpMethods>(comboBoxMethods.SelectedValue.ToString(), out methods);
-                new ApiRequestFormHandler().UpdateRequest(ToDictionary(headers), methods, txtBoxUrl.Text);
+                new ApiRequestFormHandler().UpdateRequest(ToDictionary(clientForm.getHeaders()), methods, txtBoxUrl.Text);
+                clientForm.setMethod(methods);
                 Close();
             }
             else
@@ -50,21 +44,21 @@ namespace ClientForm
 
         private void btnAddHeader_Click(object sender, EventArgs e)
         {
-            headers.Add(new LocalHeader(txtBoxHeader.Text,txtBoxHeaderData.Text));
+            clientForm.addHeader(new LocalHeader(txtBoxHeader.Text, txtBoxHeaderData.Text));
             UpdateListBoxHeaders();
             
         }
 
         private void btnRemoveHeader_Click(object sender, EventArgs e)
         {
-            headers.Remove((LocalHeader)listBoxHeaders.SelectedItem);
+            clientForm.removeHeader((LocalHeader)listBoxHeaders.SelectedItem);
             UpdateListBoxHeaders();
         }
 
         private void UpdateListBoxHeaders()
         {
             listBoxHeaders.Items.Clear();
-            foreach (LocalHeader h in headers)
+            foreach (LocalHeader h in clientForm.getHeaders())
             {
                 listBoxHeaders.Items.Add(h);
             }
@@ -73,34 +67,12 @@ namespace ClientForm
         private Dictionary<string,string> ToDictionary(List<LocalHeader> localHeaders)
         {
             Dictionary<string, string> dictionary = new Dictionary<string, string>();
-            foreach(LocalHeader h in headers)
+            foreach(LocalHeader h in clientForm.getHeaders())
             {
                 dictionary.Add(h.HeaderName,h.HeaderData);
             }
             return dictionary;
         }
-        /**
-         * Ideally the headers list would be a dictionary, but that doesn't work well with the listbox, so I made it a list
-         * But a list only has one type, so I made the localheader type to hold two strings, and in the end, it will return a dictionary with the ToDictionary method
-         */
-        private class LocalHeader
-        {
-            public string HeaderName { get; set; }
-            public string HeaderData { get; set; }
-
-            public LocalHeader(string name, string data)
-            {
-                HeaderName = name;
-                HeaderData = data;
-            }
-
-            public override string ToString()
-            {
-                return "[" + HeaderName + "]" + HeaderData;
-            }
-        }
-
-      
     }
 
     /**

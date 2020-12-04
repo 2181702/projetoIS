@@ -17,6 +17,11 @@ namespace ClientForm
 
         private HttpRequestMessage tempInputMessage;
         private HttpRequestMessage tempOutputMessage;
+
+        private String url = "";
+        private List<LocalHeader> headers = new List<LocalHeader>();
+        private HttpMethods method = HttpMethods.GET;
+
         public ClientForm()
         {
             InitializeComponent();
@@ -273,6 +278,46 @@ namespace ClientForm
             flowHandler.LoadSavedFlows();
         }
 
+        public String getUrl()
+        {
+            return url;
+        }
 
+        public void setUrl(String url)
+        {
+           this.url = url;
+        }
+
+        public HttpMethods getMethod()
+        {
+            return this.method;
+        }
+
+        public void setMethod(HttpMethods method)
+        {
+            this.method = method;
+        }
+
+
+        public List<LocalHeader> getHeaders()
+        {
+            return new List<LocalHeader>(headers);
+        }
+
+        public void addHeader(LocalHeader header)
+        {
+            if (header != null && !this.headers.Contains(header))
+            {
+                this.headers.Add(header);
+            }
+        }
+
+        public void removeHeader(LocalHeader header)
+        {
+            if (header != null && this.headers.Contains(header))
+            {
+                this.headers.Remove(header);
+            }
+        }
     }
 }

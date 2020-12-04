@@ -67,6 +67,7 @@
     <Compile Include="FlowFileHandler.cs" />
     <Compile Include="HtmlHandler.cs" />
     <Compile Include="InOutType.cs" />
+    <Compile Include="LocalHeader.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RestApiHandler.cs" />
