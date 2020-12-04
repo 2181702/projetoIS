@@ -7,9 +7,18 @@ using System.Xml;
 
 namespace ClientForm
 {
-    class ExcelHandler
+    class ExcelHandler : InputType
     {
+        public string Location { get; set; }
 
+        public ExcelHandler(string _location)
+        {
+            Location = _location;
+        }
+        public override Response<string> Run()
+        {
+            return ExcelToJson(Location);
+        }
         public Response<string> ExcelToJson(string excelFileLocation)
         {
             DataSet ds = new DataSet();
@@ -81,6 +90,7 @@ namespace ClientForm
             return xmlDoc.DocumentElement;
         }
 
+        
     }
 }
 
