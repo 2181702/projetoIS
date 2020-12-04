@@ -41,5 +41,9 @@ namespace ClientForm
                 return new Response<string>("NO JSON INFO AVALIBLE", e.Message, STATUS_CODE.ERROR);
             }
         }
+        public override string ToString()
+        {
+            return $"{Location}[HTML]";
+        }
     }
 }

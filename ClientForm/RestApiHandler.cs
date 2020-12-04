@@ -37,6 +37,11 @@ namespace ClientForm
                 return new Response<string>("",e.Message, STATUS_CODE.ERROR);
             }
         }
+
+        public override string ToString()
+        {
+            return $"[API]{Location.RequestUri}";
+        }
     }
 
     class RestApiHandlerOutput : OutputType
@@ -78,6 +83,10 @@ namespace ClientForm
             {
                 return new Response<string>("No responsse", "No responsse\nError:\n" + e.Message, STATUS_CODE.OK);
             }
+        }
+        public override string ToString()
+        {
+            return $"{Location.RequestUri}[API]";
         }
     }
 }

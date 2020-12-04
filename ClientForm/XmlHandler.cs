@@ -29,7 +29,10 @@ namespace ClientForm
             }
             
         }
-
+        public override string ToString()
+        {
+            return $"[XML]{Location}";
+        }
     }
     class XmlHandlerOutput : OutputType
     {
@@ -51,6 +54,10 @@ namespace ClientForm
             {
                 return new Response<string>("Unable to Serialize Xml Document: " + Location, e.Message, STATUS_CODE.ERROR);
             }
+        }
+        public override string ToString()
+        {
+            return $"{Location}[XML]";
         }
     }
 }

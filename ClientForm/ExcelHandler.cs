@@ -90,7 +90,10 @@ namespace ClientForm
             return xmlDoc.DocumentElement;
         }
 
-        
+        public override string ToString()
+        {
+            return $"[EXCEL]{Location}";
+        }
     }
 }
 
