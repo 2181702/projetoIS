@@ -28,15 +28,14 @@ namespace ClientForm
             {
                 List<Flow> savedFlows = new List<Flow>();
 
-                if (!System.IO.Directory.Exists(DIRECTORY_PATH))
-                    System.IO.Directory.CreateDirectory(DIRECTORY_PATH);
+                Response<string> filePath = GetFilePath();
 
-                string filePath = DIRECTORY_PATH + "/" + FILE_NAME;
+                if (filePath.Status != STATUS_CODE.OK)
+                {
+                    return new Response<List<Flow>>(new List<Flow>(), filePath.Message, STATUS_CODE.ERROR);
+                }
 
-                if (!System.IO.File.Exists(filePath))
-                    System.IO.File.Create(filePath);
-
-                string flowsFileText = System.IO.File.ReadAllText(filePath);
+                string flowsFileText = System.IO.File.ReadAllText(filePath.Data);
 
                 if (flowsFileText.Length == 0)
                 {
@@ -69,19 +68,14 @@ namespace ClientForm
 
             try
             {
-                if (!System.IO.Directory.Exists(DIRECTORY_PATH))
+                Response<string> filePath = GetFilePath();
+                
+                if (filePath.Status != STATUS_CODE.OK)
                 {
-                    System.IO.Directory.CreateDirectory(DIRECTORY_PATH);
+                    return new Response<bool>(false, filePath.Message, STATUS_CODE.ERROR);
                 }
 
-                string filePath = DIRECTORY_PATH + "/" + FILE_NAME;
-
-                if (!System.IO.File.Exists(filePath))
-                {
-                    System.IO.File.Create(filePath);
-                }
-
-                System.IO.File.WriteAllText(filePath, String.Empty);
+                System.IO.File.WriteAllText(filePath.Data, String.Empty);
 
                 StringBuilder flowsJsons = new StringBuilder();
 
@@ -97,17 +91,39 @@ namespace ClientForm
                     }
                 }
 
-                System.IO.File.WriteAllText(filePath, flowsJsons.ToString());
+                System.IO.File.WriteAllText(filePath.Data, flowsJsons.ToString());
 
                 return new Response<bool>(true, "Data exported successfully!", STATUS_CODE.OK);
             }
             catch (Exception e)
             {
-                return new Response<bool>(true, $"{e.Message}\nAn error has occurred while trying to update the flows file.\nPlease try again.", STATUS_CODE.ERROR);
+                return new Response<bool>(false, $"{e.Message}\nAn error has occurred while trying to update the flows file.\nPlease try again.", STATUS_CODE.ERROR);
             }
 
         }
 
+        private Response<string> GetFilePath()
+        {
+            try
+            {
+                if (!System.IO.Directory.Exists(DIRECTORY_PATH))
+                {
+                    System.IO.Directory.CreateDirectory(DIRECTORY_PATH);
+                }
+
+                string filePath = DIRECTORY_PATH + "/" + FILE_NAME;
+
+                if (!System.IO.File.Exists(filePath))
+                {
+                    System.IO.File.Create(filePath);
+                }
+
+                return new Response<string>(filePath, STATUS_CODE.OK);
+            } catch(Exception e)
+            {
+                return new Response<string>("There was an error while creating/checking directories.", STATUS_CODE.ERROR);
+            }
+        }
        
      
     }

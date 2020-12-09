@@ -17,7 +17,7 @@ namespace ClientForm
 
         private HttpRequestMessage tempInputMessage;
         private HttpRequestMessage tempOutputMessage;
-
+  
         private String url = "";
         private List<LocalHeader> headers = new List<LocalHeader>();
         private HttpMethods method = HttpMethods.GET;
@@ -255,6 +255,7 @@ namespace ClientForm
 
         private void btnInputRest_Click(object sender, EventArgs e)
         {
+        
             Response<HttpRequestMessage> response = new ApiRequestFormHandler(this).GetRestRequest(); 
             if (response.Status == STATUS_CODE.OK)
             {   
