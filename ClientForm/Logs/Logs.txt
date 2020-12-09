@@ -1,0 +1,8 @@
+-> Data: 09/12/2020 15:54:36 | Message: No responsse
+Error:
+O servidor remoto devolveu um erro: (500) Erro interno de servidor. | Code: ERROR ; 
+
+-> Data: 09/12/2020 15:54:50 | Message: No responsse
+Error:
+O servidor remoto devolveu um erro: (500) Erro interno de servidor. | Code: ERROR ; 
+

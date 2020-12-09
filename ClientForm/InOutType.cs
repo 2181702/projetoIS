@@ -9,5 +9,6 @@
     public abstract class OutputType
     {
         public abstract Response<string> Run(Response<string> json);
+        
     }
 }
