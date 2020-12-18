@@ -183,6 +183,7 @@ namespace ClientForm
                         break;
                 }
                 //Uncomment this lines to see server response [DEBUG purposes]
+                //MessageBox.Show(response.Data);
             }
             if (numErrors == 0)
             {
@@ -240,7 +241,9 @@ namespace ClientForm
         private void btnOutputRest_Click(object sender, EventArgs e)
         {
             Response<HttpRequestMessage> response = new ApiRequestFormHandler(this).GetRestRequest();
-            if(response.Status == STATUS_CODE.OK)
+            if (response == null)
+                return;
+            if (response.Status == STATUS_CODE.OK)
             {
                 textBoxOutputRest.Text = response.Data.RequestUri.ToString();
                 tempOutputMessage = response.Data;
@@ -254,7 +257,9 @@ namespace ClientForm
         private void btnInputRest_Click(object sender, EventArgs e)
         {
         
-            Response<HttpRequestMessage> response = new ApiRequestFormHandler(this).GetRestRequest(); 
+            Response<HttpRequestMessage> response = new ApiRequestFormHandler(this).GetRestRequest();
+            if (response == null)
+                return;
             if (response.Status == STATUS_CODE.OK)
             {   
                 textBoxInputRest.Text = "["+response.Data.Method.ToString()+"] "+response.Data.RequestUri.ToString();

@@ -45,6 +45,8 @@ namespace ClientForm
         private void btnAddHeader_Click(object sender, EventArgs e)
         {
             clientForm.addHeader(new LocalHeader(txtBoxHeader.Text, txtBoxHeaderData.Text));
+            txtBoxHeader.Text = "";
+            txtBoxHeaderData.Text = "";
             UpdateListBoxHeaders();
             
         }
