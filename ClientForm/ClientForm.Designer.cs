@@ -120,7 +120,7 @@ namespace ClientForm
             // radioInputXML
             // 
             this.radioInputXML.AutoSize = true;
-            this.radioInputXML.Location = new System.Drawing.Point(24, 116);
+            this.radioInputXML.Location = new System.Drawing.Point(24, 119);
             this.radioInputXML.Name = "radioInputXML";
             this.radioInputXML.Size = new System.Drawing.Size(47, 17);
             this.radioInputXML.TabIndex = 8;
@@ -170,7 +170,7 @@ namespace ClientForm
             // 
             // buttonOpenXml
             // 
-            this.buttonOpenXml.Location = new System.Drawing.Point(100, 111);
+            this.buttonOpenXml.Location = new System.Drawing.Point(100, 114);
             this.buttonOpenXml.Name = "buttonOpenXml";
             this.buttonOpenXml.Size = new System.Drawing.Size(33, 27);
             this.buttonOpenXml.TabIndex = 10;
@@ -198,7 +198,7 @@ namespace ClientForm
             // 
             // textBoxInputXml
             // 
-            this.textBoxInputXml.Location = new System.Drawing.Point(160, 115);
+            this.textBoxInputXml.Location = new System.Drawing.Point(160, 118);
             this.textBoxInputXml.Name = "textBoxInputXml";
             this.textBoxInputXml.ReadOnly = true;
             this.textBoxInputXml.Size = new System.Drawing.Size(190, 20);
@@ -307,7 +307,7 @@ namespace ClientForm
             // radioOutputRest
             // 
             this.radioOutputRest.AutoSize = true;
-            this.radioOutputRest.Location = new System.Drawing.Point(39, 118);
+            this.radioOutputRest.Location = new System.Drawing.Point(39, 181);
             this.radioOutputRest.Name = "radioOutputRest";
             this.radioOutputRest.Size = new System.Drawing.Size(64, 17);
             this.radioOutputRest.TabIndex = 19;
@@ -317,7 +317,7 @@ namespace ClientForm
             // 
             // textBoxOutputRest
             // 
-            this.textBoxOutputRest.Location = new System.Drawing.Point(158, 116);
+            this.textBoxOutputRest.Location = new System.Drawing.Point(158, 179);
             this.textBoxOutputRest.Name = "textBoxOutputRest";
             this.textBoxOutputRest.ReadOnly = true;
             this.textBoxOutputRest.Size = new System.Drawing.Size(192, 20);
@@ -354,7 +354,7 @@ namespace ClientForm
             // 
             // btnOutputXml
             // 
-            this.btnOutputXml.Location = new System.Drawing.Point(109, 176);
+            this.btnOutputXml.Location = new System.Drawing.Point(109, 114);
             this.btnOutputXml.Name = "btnOutputXml";
             this.btnOutputXml.Size = new System.Drawing.Size(35, 27);
             this.btnOutputXml.TabIndex = 15;
@@ -364,7 +364,7 @@ namespace ClientForm
             // 
             // textBoxOutputXml
             // 
-            this.textBoxOutputXml.Location = new System.Drawing.Point(158, 180);
+            this.textBoxOutputXml.Location = new System.Drawing.Point(158, 118);
             this.textBoxOutputXml.Name = "textBoxOutputXml";
             this.textBoxOutputXml.Size = new System.Drawing.Size(192, 20);
             this.textBoxOutputXml.TabIndex = 14;
@@ -372,7 +372,7 @@ namespace ClientForm
             // radioOutputXml
             // 
             this.radioOutputXml.AutoSize = true;
-            this.radioOutputXml.Location = new System.Drawing.Point(39, 180);
+            this.radioOutputXml.Location = new System.Drawing.Point(39, 118);
             this.radioOutputXml.Name = "radioOutputXml";
             this.radioOutputXml.Size = new System.Drawing.Size(47, 17);
             this.radioOutputXml.TabIndex = 13;
@@ -382,7 +382,7 @@ namespace ClientForm
             // 
             // btnOutputRest
             // 
-            this.btnOutputRest.Location = new System.Drawing.Point(109, 111);
+            this.btnOutputRest.Location = new System.Drawing.Point(109, 174);
             this.btnOutputRest.Name = "btnOutputRest";
             this.btnOutputRest.Size = new System.Drawing.Size(35, 27);
             this.btnOutputRest.TabIndex = 12;

@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace ClientForm
-{   
-    public partial class ApiRequestForm : Form
+{
+    public partial class ApiRequestFormInput : Form
     {
         ClientForm clientForm;
 
-        public ApiRequestForm(ClientForm cf)
+        public ApiRequestFormInput(ClientForm cf)
         {
             InitializeComponent();
             clientForm = cf;
@@ -17,9 +17,9 @@ namespace ClientForm
         private void ApiRequestForm_Load(object sender, EventArgs e)
         {
             comboBoxMethods.DataSource = Enum.GetValues(typeof(HttpMethods));
-            txtBoxUrl.Text = clientForm.getUrl();
+            txtBoxUrl.Text = clientForm.getUrlIn();
             UpdateListBoxHeaders();
-            comboBoxMethods.SelectedItem = clientForm.getMethod();
+            comboBoxMethods.SelectedItem = clientForm.getMethodIn();
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -29,11 +29,11 @@ namespace ClientForm
 
             if (result)
             {
-                clientForm.setUrl(txtBoxUrl.Text);
+                clientForm.setUrlIn(txtBoxUrl.Text);
                 HttpMethods methods;
                 Enum.TryParse<HttpMethods>(comboBoxMethods.SelectedValue.ToString(), out methods);
-                new ApiRequestFormHandler().UpdateRequest(ToDictionary(clientForm.getHeaders()), methods, txtBoxUrl.Text);
-                clientForm.setMethod(methods);
+                new ApiRequestFormHandler().UpdateRequest(ToDictionary(clientForm.getHeadersIn()), methods, txtBoxUrl.Text);
+                clientForm.setMethodIn(methods);
                 Close();
             }
             else
@@ -44,44 +44,34 @@ namespace ClientForm
 
         private void btnAddHeader_Click(object sender, EventArgs e)
         {
-            clientForm.addHeader(new LocalHeader(txtBoxHeader.Text, txtBoxHeaderData.Text));
-            txtBoxHeader.Text = "";
-            txtBoxHeaderData.Text = "";
+            clientForm.addHeaderIn(new LocalHeader(txtBoxHeader.Text, txtBoxHeaderData.Text));
             UpdateListBoxHeaders();
-            
+
         }
 
         private void btnRemoveHeader_Click(object sender, EventArgs e)
         {
-            clientForm.removeHeader((LocalHeader)listBoxHeaders.SelectedItem);
+            clientForm.removeHeaderIn((LocalHeader)listBoxHeaders.SelectedItem);
             UpdateListBoxHeaders();
         }
 
         private void UpdateListBoxHeaders()
         {
             listBoxHeaders.Items.Clear();
-            foreach (LocalHeader h in clientForm.getHeaders())
+            foreach (LocalHeader h in clientForm.getHeadersIn())
             {
                 listBoxHeaders.Items.Add(h);
             }
         }
 
-        private Dictionary<string,string> ToDictionary(List<LocalHeader> localHeaders)
+        private Dictionary<string, string> ToDictionary(List<LocalHeader> localHeaders)
         {
             Dictionary<string, string> dictionary = new Dictionary<string, string>();
-            foreach(LocalHeader h in clientForm.getHeaders())
+            foreach (LocalHeader h in clientForm.getHeadersIn())
             {
-                dictionary.Add(h.HeaderName,h.HeaderData);
+                dictionary.Add(h.HeaderName, h.HeaderData);
             }
             return dictionary;
         }
-    }
-
-    /**
-     * an enum just to work better with the combobox
-     */
-    public enum HttpMethods
-    {
-        GET, POST, DELETE, PUT
     }
 }

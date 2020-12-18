@@ -1,7 +1,7 @@
 ﻿
 namespace ClientForm
 {
-    partial class ApiRequestForm
+    partial class ApiRequestFormInput
     {
         /// <summary>
         /// Required designer variable.

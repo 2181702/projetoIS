@@ -17,10 +17,14 @@ namespace ClientForm
 
         private HttpRequestMessage tempInputMessage;
         private HttpRequestMessage tempOutputMessage;
-  
-        private String url = "";
-        private List<LocalHeader> headers = new List<LocalHeader>();
-        private HttpMethods method = HttpMethods.GET;
+
+        private String urlIn = "";
+        private List<LocalHeader> headersIn = new List<LocalHeader>();
+        private HttpMethods methodIn = HttpMethods.GET;
+
+        private String urlOut = "";
+        private List<LocalHeader> headersOut = new List<LocalHeader>();
+        private HttpMethods methodOut = HttpMethods.GET;
 
         public ClientForm()
         {
@@ -240,12 +244,12 @@ namespace ClientForm
 
         private void btnOutputRest_Click(object sender, EventArgs e)
         {
-            Response<HttpRequestMessage> response = new ApiRequestFormHandler(this).GetRestRequest();
+            Response<HttpRequestMessage> response = new ApiRequestFormHandler(this).GetRestRequestOutput();
             if (response == null)
                 return;
             if (response.Status == STATUS_CODE.OK)
             {
-                textBoxOutputRest.Text = response.Data.RequestUri.ToString();
+                textBoxOutputRest.Text = "[" + response.Data.Method.ToString() + "] " + response.Data.RequestUri.ToString();
                 tempOutputMessage = response.Data;
             }
             else
@@ -257,7 +261,7 @@ namespace ClientForm
         private void btnInputRest_Click(object sender, EventArgs e)
         {
         
-            Response<HttpRequestMessage> response = new ApiRequestFormHandler(this).GetRestRequest();
+            Response<HttpRequestMessage> response = new ApiRequestFormHandler(this).GetRestRequestInput();
             if (response == null)
                 return;
             if (response.Status == STATUS_CODE.OK)
@@ -282,46 +286,92 @@ namespace ClientForm
             flowHandler.LoadSavedFlows();
         }
 
-        public String getUrl()
+        public String getUrlIn()
         {
-            return url;
+            return urlIn;
         }
 
-        public void setUrl(String url)
+        public void setUrlIn(String url)
         {
-           this.url = url;
+            this.urlIn = url;
         }
 
-        public HttpMethods getMethod()
+        public HttpMethods getMethodIn()
         {
-            return this.method;
+            return this.methodIn;
         }
 
-        public void setMethod(HttpMethods method)
+        public void setMethodIn(HttpMethods method)
         {
-            this.method = method;
+            this.methodIn = method;
         }
 
 
-        public List<LocalHeader> getHeaders()
+        public List<LocalHeader> getHeadersIn()
         {
-            return new List<LocalHeader>(headers);
+            return new List<LocalHeader>(headersIn);
         }
 
-        public void addHeader(LocalHeader header)
+        public void addHeaderIn(LocalHeader header)
         {
-            if (header != null && !this.headers.Contains(header))
+            if (header != null && !this.headersIn.Contains(header))
             {
-                this.headers.Add(header);
+                this.headersIn.Add(header);
             }
         }
 
-        public void removeHeader(LocalHeader header)
+        public void removeHeaderIn(LocalHeader header)
         {
-            if (header != null && this.headers.Contains(header))
+            if (header != null && this.headersIn.Contains(header))
             {
-                this.headers.Remove(header);
+                this.headersIn.Remove(header);
             }
         }
+
+        public String getUrlOut()
+        {
+            return urlOut;
+        }
+
+        public void setUrlOut(String url)
+        {
+            this.urlOut = url;
+        }
+
+        public HttpMethods getMethodOut()
+        {
+            return this.methodOut;
+        }
+
+        public void setMethodOut(HttpMethods method)
+        {
+            this.methodOut = method;
+        }
+
+
+        public List<LocalHeader> getHeadersOut()
+        {
+            return new List<LocalHeader>(headersOut);
+        }
+
+        public void addHeaderOut(LocalHeader header)
+        {
+            if (header != null && !this.headersOut.Contains(header))
+            {
+                this.headersOut.Add(header);
+            }
+        }
+
+        public void removeHeaderOut(LocalHeader header)
+        {
+            if (header != null && this.headersOut.Contains(header))
+            {
+                this.headersOut.Remove(header);
+            }
+        }
+    }
+    public enum HttpMethods
+    {
+        GET, POST, DELETE, PUT
     }
 }

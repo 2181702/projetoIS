@@ -23,9 +23,16 @@ namespace ClientForm
         {
         }
 
-        public Response<HttpRequestMessage> GetRestRequest()
+        public Response<HttpRequestMessage> GetRestRequestInput()
         {
-            ApiRequestForm requestForm = new ApiRequestForm(client);
+            ApiRequestFormInput requestForm = new ApiRequestFormInput(client);
+            requestForm.ShowDialog();
+            return response;
+        }
+
+        public Response<HttpRequestMessage> GetRestRequestOutput()
+        {
+            ApiRequestFormOutput requestForm = new ApiRequestFormOutput(client);
             requestForm.ShowDialog();
             return response;
         }
