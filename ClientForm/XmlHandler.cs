@@ -43,6 +43,10 @@ namespace ClientForm
         }
         public override Response<string> Run(Response<string> response)
         {
+            if (!Location.EndsWith(".xml"))
+            {
+                Location += ".xml";
+            }
             try
             {
                 response.Data = "{root:" + response.Data + "}";
