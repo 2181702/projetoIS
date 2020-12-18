@@ -157,7 +157,6 @@ namespace ClientForm
         private void buttonSaveHtml_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "HTML Documents| *.html";
             openFileDialog.ShowDialog();
             textBoxOutputHtml.Text = openFileDialog.FileName;
         }
@@ -165,7 +164,6 @@ namespace ClientForm
         private void btnOutputXml_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "XML Files| *.xml";
             openFileDialog.ShowDialog();
             textBoxOutputXml.Text = openFileDialog.FileName;
         }

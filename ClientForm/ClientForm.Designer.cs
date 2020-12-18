@@ -70,7 +70,7 @@ namespace ClientForm
             // 
             this.buttonRun.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.buttonRun.Location = new System.Drawing.Point(357, 463);
-            this.buttonRun.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonRun.Margin = new System.Windows.Forms.Padding(2);
             this.buttonRun.Name = "buttonRun";
             this.buttonRun.Size = new System.Drawing.Size(80, 41);
             this.buttonRun.TabIndex = 1;
@@ -301,7 +301,6 @@ namespace ClientForm
             // 
             this.textBoxOutputHtml.Location = new System.Drawing.Point(158, 59);
             this.textBoxOutputHtml.Name = "textBoxOutputHtml";
-            this.textBoxOutputHtml.ReadOnly = true;
             this.textBoxOutputHtml.Size = new System.Drawing.Size(192, 20);
             this.textBoxOutputHtml.TabIndex = 15;
             // 
@@ -367,7 +366,6 @@ namespace ClientForm
             // 
             this.textBoxOutputXml.Location = new System.Drawing.Point(158, 180);
             this.textBoxOutputXml.Name = "textBoxOutputXml";
-            this.textBoxOutputXml.ReadOnly = true;
             this.textBoxOutputXml.Size = new System.Drawing.Size(192, 20);
             this.textBoxOutputXml.TabIndex = 14;
             // 
@@ -396,7 +394,7 @@ namespace ClientForm
             // 
             this.buttonAddFlow.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.buttonAddFlow.Location = new System.Drawing.Point(357, 243);
-            this.buttonAddFlow.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonAddFlow.Margin = new System.Windows.Forms.Padding(2);
             this.buttonAddFlow.Name = "buttonAddFlow";
             this.buttonAddFlow.Size = new System.Drawing.Size(80, 33);
             this.buttonAddFlow.TabIndex = 22;
@@ -433,7 +431,7 @@ namespace ClientForm
             this.Controls.Add(this.buttonRun);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "ClientForm";
             this.Text = " Data Sources Converter Dashboard";
             this.Load += new System.EventHandler(this.Form1_Load);
