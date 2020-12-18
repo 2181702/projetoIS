@@ -11,9 +11,12 @@ namespace ClientForm
     {
         public string Location { get; set; }
 
-        public ExcelHandler(string _location)
+        public string SheetName { get; set; }
+
+        public ExcelHandler(string _location, string worksheet)
         {
             Location = _location;
+            SheetName = worksheet;
         }
         public override Response<string> Run()
         {
@@ -32,7 +35,7 @@ namespace ClientForm
 
                 cmd.Connection = conn;
 
-                string ExcelSheetName = FetchSheetName(conn);
+                string ExcelSheetName = SheetName;
 
                 // Updates and sets the query to read all data from the Sheet 
                 cmd.CommandText = "SELECT * From [" + ExcelSheetName + "]";
@@ -49,7 +52,7 @@ namespace ClientForm
             }
         }
 
-        private Response<string> GetConnectionString(string excelFileLocation)
+        public Response<string> GetConnectionString(string excelFileLocation)
         {
             string Ext = Path.GetExtension(excelFileLocation);
 
@@ -67,13 +70,21 @@ namespace ClientForm
             }
         }
 
-        private string FetchSheetName(OleDbConnection conn)
+        public DataTable getWorkSheets()
         {
+
+            string connectionString = GetConnectionString(Location).Data;
+
+            OleDbConnection conn = new OleDbConnection(connectionString);
+            OleDbCommand cmd = new OleDbCommand();
+            OleDbDataAdapter dataAdapter = new OleDbDataAdapter();
+
+            cmd.Connection = conn;
             conn.Open();
             DataTable dtSchema = conn.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null);
-            string ExcelSheetName = dtSchema.Rows[0]["TABLE_NAME"].ToString();
+            DataTable workSheets = dtSchema;
             conn.Close();
-            return ExcelSheetName;
+            return workSheets;
         }
 
         private void FillSheetData(DataSet ds, OleDbConnection conn, OleDbDataAdapter dataAdapter)
@@ -96,32 +107,3 @@ namespace ClientForm
         }
     }
 }
-
-/**
-//MyConnection = new System.Data.OleDb.OleDbConnection("provider=Microsoft.Jet.OLEDB.4.0; Data Source = " + excelFileLocation + "; Extended Properties=Excel 8.0;");
-//MyCommand.TableMappings.Add("Table", "Product");
-
-OleDbConnection connection;
-DataSet dataSet;
-OleDbDataAdapter dataAdapter;
-XmlHandler xmlHandler = new XmlHandler();
-XmlDocument xmlDoc = new XmlDocument();
-
-//MyConnection = new OleDbConnection("Provider = Microsoft.Jet.OLEDB.4.0; Data Source = " + excelFileLocation + "; Extended Properties = 'Excel 8.0;HDR=YES'");
-connection = new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0; Data Source = " + excelFileLocation + "; Extended Properties = 'Excel 12.0 Xml;HDR=YES'");
-dataAdapter = new OleDbDataAdapter("select * from [default]", connection);
-
-dataSet = new DataSet();
-
-MessageBox.Show("EXCEL DATASET FILL");
-dataAdapter.Fill(dataSet);
-                
-MessageBox.Show("EXCEL CONVERSION");
-xml = dataSet.GetXml();
-xmlDoc.LoadXml(xml);
-XmlNode xmlNode = xmlDoc.DocumentElement;
-connection.Close();
-
-return new Response<string>(JsonConvert.SerializeXmlNode(xmlNode), "Excel -> Json | OK!", STATUS_CODE.OK);
-
-*/

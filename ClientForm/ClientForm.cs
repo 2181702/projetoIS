@@ -43,7 +43,7 @@ namespace ClientForm
             switch(GetSelectedInput())
             {
                 case DataType.EXCEL:
-                    input = new ExcelHandler(textBoxInputExcel.Text);
+                    input = new ExcelHandler(textBoxInputExcel.Text, comboBoxWorkSheet.SelectedValue.ToString()+"$");
                     break;
                 case DataType.REST:
                     input = new RestApiHandlerInput(tempInputMessage);
@@ -148,6 +148,18 @@ namespace ClientForm
             openFileDialog.Filter = "Excel Worksheets| *.xls;*.xlsx";
             openFileDialog.ShowDialog();
             textBoxInputExcel.Text = openFileDialog.FileName;
+
+            ExcelHandler excelHandler = new ExcelHandler(textBoxInputExcel.Text, "");
+            DataTable worksheets = excelHandler.getWorkSheets();
+
+            List<string> names = new List<string>();
+
+            foreach (DataRow item in worksheets.Rows)
+            {
+                string str = item[2].ToString().Replace("'", "");
+                names.Add(str.Replace("$", ""));
+            }
+            comboBoxWorkSheet.DataSource = names;
         }
 
         private void buttonOpenXml_Click(object sender, EventArgs e)

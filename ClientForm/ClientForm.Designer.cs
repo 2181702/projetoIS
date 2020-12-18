@@ -62,6 +62,7 @@ namespace ClientForm
             this.btnOutputRest = new System.Windows.Forms.Button();
             this.buttonAddFlow = new System.Windows.Forms.Button();
             this.buttonImportFlows = new System.Windows.Forms.Button();
+            this.comboBoxWorkSheet = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -142,6 +143,7 @@ namespace ClientForm
             // groupBox1
             // 
             this.groupBox1.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.groupBox1.Controls.Add(this.comboBoxWorkSheet);
             this.groupBox1.Controls.Add(this.btnInputRest);
             this.groupBox1.Controls.Add(this.buttonOpenXml);
             this.groupBox1.Controls.Add(this.buttonOpenExcel);
@@ -190,26 +192,26 @@ namespace ClientForm
             // 
             // textBoxInputRest
             // 
-            this.textBoxInputRest.Location = new System.Drawing.Point(160, 180);
+            this.textBoxInputRest.Location = new System.Drawing.Point(150, 180);
             this.textBoxInputRest.Name = "textBoxInputRest";
             this.textBoxInputRest.ReadOnly = true;
-            this.textBoxInputRest.Size = new System.Drawing.Size(190, 20);
+            this.textBoxInputRest.Size = new System.Drawing.Size(222, 20);
             this.textBoxInputRest.TabIndex = 1;
             // 
             // textBoxInputXml
             // 
-            this.textBoxInputXml.Location = new System.Drawing.Point(160, 118);
+            this.textBoxInputXml.Location = new System.Drawing.Point(150, 118);
             this.textBoxInputXml.Name = "textBoxInputXml";
             this.textBoxInputXml.ReadOnly = true;
-            this.textBoxInputXml.Size = new System.Drawing.Size(190, 20);
+            this.textBoxInputXml.Size = new System.Drawing.Size(222, 20);
             this.textBoxInputXml.TabIndex = 1;
             // 
             // textBoxInputExcel
             // 
-            this.textBoxInputExcel.Location = new System.Drawing.Point(161, 59);
+            this.textBoxInputExcel.Location = new System.Drawing.Point(251, 59);
             this.textBoxInputExcel.Name = "textBoxInputExcel";
             this.textBoxInputExcel.ReadOnly = true;
-            this.textBoxInputExcel.Size = new System.Drawing.Size(190, 20);
+            this.textBoxInputExcel.Size = new System.Drawing.Size(121, 20);
             this.textBoxInputExcel.TabIndex = 1;
             // 
             // label3
@@ -413,6 +415,14 @@ namespace ClientForm
             this.buttonImportFlows.UseVisualStyleBackColor = true;
             this.buttonImportFlows.Click += new System.EventHandler(this.buttonImportFlows_Click);
             // 
+            // comboBoxWorkSheet
+            // 
+            this.comboBoxWorkSheet.FormattingEnabled = true;
+            this.comboBoxWorkSheet.Location = new System.Drawing.Point(150, 60);
+            this.comboBoxWorkSheet.Name = "comboBoxWorkSheet";
+            this.comboBoxWorkSheet.Size = new System.Drawing.Size(95, 21);
+            this.comboBoxWorkSheet.TabIndex = 12;
+            // 
             // ClientForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -478,6 +488,7 @@ namespace ClientForm
         private System.Windows.Forms.RadioButton radioOutputXml;
         private System.Windows.Forms.Button buttonImportFlows;
         private System.Windows.Forms.TextBox textBoxInputRest;
+        private System.Windows.Forms.ComboBox comboBoxWorkSheet;
     }
 }
 
